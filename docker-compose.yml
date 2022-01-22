@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  cryptocurrency:
+    image: quarkus/hobby-jvm
+    ports:
+      - "80:8080"

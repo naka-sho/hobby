@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: cryptocurrency
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: cryptocurrency
+      MYSQL_PASSWORD: cryptocurrency12345
+      TZ: Asia/Tokyo
+    ports:
+      - 3306:3306
+    volumes:
+      - "./docker/mysql/conf.d/my.conf:/etc/mysql/conf.d/my.cnf"
+      - "./docker/mysql/initdb.d:/docker-entrypoint-initdb.d"
+      - "./docker/mysql/db:/var/lib/mysql"

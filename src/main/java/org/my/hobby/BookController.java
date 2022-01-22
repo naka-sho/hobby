@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotBlank;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -56,7 +57,7 @@ public class BookController {
                     .map(e -> e.getMessage())
                     .collect(Collectors.joining(","));
             final BookSearchResponse.Book hobbyBook = new BookSearchResponse.Book("", "");
-            return new BookSearchResponse(false, errorMessage, hobbyBook);
+            throw  new NotFoundException("not found");
         }
 
         final Book book = bookService.find(bookSearchRequest.title());
