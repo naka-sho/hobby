@@ -1,17 +1,17 @@
-package org.my.hobby;
+package org.my.hobby.controller;
 
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotBlank;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Set;
-import java.util.stream.Collectors;
 
+import java.util.Set;
+
+import org.my.hobby.controller.exception.handler.BadRequestException;
 import org.my.hobby.core.Book;
 import org.my.hobby.service.BookService;
 
@@ -49,15 +49,10 @@ public class BookController {
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public BookSearchResponse search(BookSearchRequest bookSearchRequest) {
+    public BookSearchResponse search(BookSearchRequest bookSearchRequest) throws BadRequestException {
         Set<ConstraintViolation<BookSearchRequest>> violations = validator.validate(bookSearchRequest);
         if (!violations.isEmpty()) {
-            final String errorMessage = violations
-                    .stream()
-                    .map(e -> e.getMessage())
-                    .collect(Collectors.joining(","));
-            final BookSearchResponse.Book hobbyBook = new BookSearchResponse.Book("", "");
-            throw  new NotFoundException("not found");
+            throw new BadRequestException("not found");
         }
 
         final Book book = bookService.find(bookSearchRequest.title());
