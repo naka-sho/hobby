@@ -22,7 +22,6 @@ public class Resource {
         return "OK";
     }
 
-    @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance item(Item item);
     }

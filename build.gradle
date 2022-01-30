@@ -34,8 +34,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.1'
-
-    implementation 'io.nem:symbol-sdk-vertx-client:1.0.1'
 }
 
 group 'quarkus'
