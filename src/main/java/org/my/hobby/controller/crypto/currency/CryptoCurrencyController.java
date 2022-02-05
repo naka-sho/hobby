@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
-import org.my.hobby.Item;
 
 @Path("/")
 public class CryptoCurrencyController {

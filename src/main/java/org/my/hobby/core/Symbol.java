@@ -1,4 +1,4 @@
-package org.my.hobby.repository;
+package org.my.hobby.core;
 
 public record Symbol(
         String address

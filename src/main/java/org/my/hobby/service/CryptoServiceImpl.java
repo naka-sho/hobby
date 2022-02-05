@@ -3,8 +3,8 @@ package org.my.hobby.service;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.my.hobby.core.Symbol;
 import org.my.hobby.repository.CryptoRepository;
-import org.my.hobby.repository.Symbol;
 
 @Singleton
 public class CryptoServiceImpl implements CryptoService {

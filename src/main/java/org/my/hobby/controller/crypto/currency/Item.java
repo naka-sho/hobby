@@ -1,4 +1,4 @@
-package org.my.hobby;
+package org.my.hobby.controller.crypto.currency;
 
 import java.math.BigDecimal;
 
