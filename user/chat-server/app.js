@@ -33,7 +33,9 @@ server.listen(3001, () => {
     console.log('Listening..');
 });
 
-//日付から文字列に変換する関数
+/*
+ * 日付から文字列に変換する関数
+ */
 function getStringFromDate(date) {
 
     var year_str = date.getFullYear();

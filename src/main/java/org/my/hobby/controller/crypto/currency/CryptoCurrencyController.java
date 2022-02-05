@@ -13,7 +13,7 @@ import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import org.my.hobby.Item;
 
-@Path("/crypto/currency")
+@Path("/")
 public class CryptoCurrencyController {
 
     @Inject

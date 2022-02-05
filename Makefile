@@ -29,10 +29,3 @@ prod:
 		-f docker-compose-user.yml \
 		-f docker-compose-socket.yml \
 		up
-
-#prod:
-#	docker-compose \
-#		-f docker-compose-adminer.yml \
-#		-f docker-compose-mysql.yml \
-#		-f docker-compose.yml \
-#		up
