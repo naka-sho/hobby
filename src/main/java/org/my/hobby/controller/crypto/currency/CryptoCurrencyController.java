@@ -13,7 +13,7 @@ import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import org.my.hobby.Item;
 
-@Path("/crypto/currency")
+@Path("/")
 public class CryptoCurrencyController {
 
     @Inject
@@ -21,20 +21,33 @@ public class CryptoCurrencyController {
 
     @CheckedTemplate
     public static class Templates {
+        public static native TemplateInstance setting(Item item);
         public static native TemplateInstance list(Item item);
         public static native TemplateInstance add(Item item);
         public static native TemplateInstance delete(Item item);
     }
 
     /**
-     * 初期表示
+     * 設定
+     *
+     * @return
+     */
+    @GET
+    @Path("setting")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance setting() {
+        return Templates.setting(new Item("test", new BigDecimal("1.234")));
+    }
+
+    /**
+     * アドレス一覧
      *
      * @return
      */
     @GET
     @Path("")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance index() {
+    public TemplateInstance list() {
         return Templates.list(new Item("test", new BigDecimal("1.234")));
     }
 

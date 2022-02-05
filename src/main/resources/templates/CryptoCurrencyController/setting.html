@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仮想通貨送信管理画面</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 90px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            z-index: 99;
+        }
+
+        @media (max-width: 767.98px) {
+            .sidebar {
+                top: 11.5rem;
+                padding: 0;
+            }
+        }
+
+        .navbar {
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+        }
+
+        @media (min-width: 767.98px) {
+            .navbar {
+                top: 0;
+                position: sticky;
+                z-index: 999;
+            }
+        }
+
+        .sidebar .nav-link {
+            color: #333;
+        }
+
+        .sidebar .nav-link.active {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light p-3">
+    <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+        <a class="navbar-brand" href="#">
+            仮想通貨送信管理画面
+        </a>
+        <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span class="ml-2">設定</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                            <span class="ml-2">送信先</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">設定</li>
+                </ol>
+            </nav>
+            <div class="row">
+                <div class="col-12 col-xl-12 mb-4 mb-lg-0">
+                    <div class="card">
+                        <h5 class="card-header">ルール設定</h5>
+                        <div class="card-body">
+                            <form>
+                                <fieldset class="row mb-3">
+                                    <legend class="col-form-label col-sm-2 pt-0">通貨</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="crypto" id="crypto" value="option1" checked>
+                                            <label class="form-check-label" for="crypto">
+                                                シンボル
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">ハッシュ値</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail3">
+                                        Network generation hash hex
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">epochAdjustment</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword3">
+                                        the network's epoch adjustment (seconds). Defined in the network/properties. e.g. 1573430400
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">秘密鍵</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="privateKey">
+                                        Private key from an account
+                                    </div>
+                                </div>
+                                <fieldset class="row mb-3">
+                                    <legend class="col-form-label col-sm-2 pt-0">ネットワークタイプ</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="env" id="env" value="option1" checked>
+                                            <label class="form-check-label" for="env">
+                                                テスト
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">モザイクID</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="mosaic">
+                                        Create MosaicId from mosaic id in form of array of number (ex: [3646934825, 3576016193]) or the hexadecimal notation thereof in form of a string.
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">ノード</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="node">
+                                        ex: [https://sym-test.opening-line.jp:3001]
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">総付与数</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="pointSum">
+                                        ex: 100000000 → 1000XYM
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">1ユーザあたりの付与数</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="point">
+                                        ex: 100000 → 1XYM
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">同一ユーザの付与上限回数</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="pointUserCount">
+                                        ex: 0の場合は無制限
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">更新</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="pt-5 d-flex justify-content-between">
+                <span>Copyright © 2022-2023 nakao shogo</span>
+                <ul class="nav m-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" aria-current="page" href="#">プライバシーポリシー(coming soon)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#">問い合わせ(coming soon)</a>
+                    </li>
+                </ul>
+            </footer>
+        </main>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script>
+    new Chartist.Line('#traffic-chart', {
+        labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+        series: [
+            [23000, 25000, 19000, 34000, 56000, 64000]
+        ]
+    }, {
+        low: 0,
+        showArea: true
+    });
+</script>
+</body>
+</html>
