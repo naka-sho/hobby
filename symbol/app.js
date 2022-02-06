@@ -12,7 +12,6 @@ const symbol = require('symbol-sdk');
  * ヘルスチェック
  */
 app.get('/', async (request, response) => {
-    console.log('OK');
     response.statusCode = 200;
     response.send('OK');
 });
@@ -21,7 +20,6 @@ app.get('/', async (request, response) => {
  * ネットタイプ
  */
 app.get('/net/type', async (request, response) => {
-    console.log('OK');
     response.statusCode = 200;
     response.json(symbol.NetworkType);
 });
@@ -70,25 +68,25 @@ app.post('/send', async (request, response) => {
             (x) => {
                 const transaction = new Transaction(signedTx.hash);
                 const data = {
-                    hash : transaction.hash,
+                    hash: transaction.hash,
                 };
 
-                axios
-                    .post('http://localhost:3000/users', data)
-                    .then(response => {
-                        // console.log(response);
-                    })
-                    .catch(reason => {
-                        console.log(transaction)
-                        console.log(reason)
-                    });
-                },
+                // axios
+                //     .post('http://localhost:3000/users', data)
+                //     .then(response => {
+                //         // console.log(response);
+                //     })
+                //     .catch(reason => {
+                //         // console.log(transaction)
+                //         // console.log(reason)
+                //     });
+            },
             (err) => {
                 console.log(err)
             }
         );
     response.statusCode = 200;
-    response.json("OK");
+    response.json({"message": "OK"});
 });
 
 class Transaction {

@@ -2,12 +2,24 @@ package org.my.hobby.controller.crypto.currency;
 
 import javax.inject.Inject;
 import javax.validation.Validator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.my.hobby.core.Symbol;
 import org.my.hobby.service.CryptoService;
+
+record SendRequest(
+        @NotBlank(message = "sendAddrees not found") String sendAddrees,
+        @Min(0L) Long price,
+        String message
+) {
+}
 
 @Path("api")
 public class CryptoCurrencyApiController {
@@ -23,11 +35,30 @@ public class CryptoCurrencyApiController {
      *
      * @return
      */
-    @GET
+    @POST
     @Path("send")
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String send(SendRequest sendRequest) {
+
+        Symbol symbol = new Symbol(sendRequest.sendAddrees(),
+                sendRequest.price(),
+                sendRequest.message()
+        );
+
+        cryptoService.send(symbol);
+        return "OK";
+    }
+
+    /**
+     * 送金ログ登録
+     *
+     * @return
+     */
+    @POST
+    @Path("queue/add")
+    @Produces(MediaType.APPLICATION_JSON)
     public String index() {
-        cryptoService.send();
-        return "aaaa";
+//        cryptoService.send();
+        return "OK";
     }
 }

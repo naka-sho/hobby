@@ -16,10 +16,10 @@ symbol:
 	cd symbol && node app.js
 
 user-client:
-	cd user/chat-client && yarn start
+	cd user/chat-client && yarn install && yarn start
 
 socket:
-	cd user/chat-server && node app.js
+	cd user/chat-server && npm install && node app.js
 
 build:
 	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache

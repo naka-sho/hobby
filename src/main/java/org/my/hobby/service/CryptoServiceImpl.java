@@ -13,7 +13,7 @@ public class CryptoServiceImpl implements CryptoService {
     CryptoRepository cryptoRepository;
 
     @Override
-    public boolean send() {
-        return cryptoRepository.send(new Symbol("NBSNDMDP5C3AUWGU4GG5PPSHRZGE3IEMQNOPPRY"));
+    public boolean send(Symbol symbol) {
+        return cryptoRepository.send(symbol);
     }
 }

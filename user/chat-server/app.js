@@ -15,7 +15,7 @@ app.post('/send', async (request, response) => {
     io.emit("sendMessage", { name: '管理bot', text: "bbbb" });
 
     response.statusCode = 200;
-    response.json("OK");
+    response.json({"message":"OK"});
 });
 
 io.on('connection', (socket) => {

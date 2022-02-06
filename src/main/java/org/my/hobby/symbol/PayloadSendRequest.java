@@ -1,8 +1,10 @@
-package org.my.hobby.core;
+package org.my.hobby.symbol;
 
-public record Symbol(
+public record PayloadSendRequest(
         String sendAddress,
         Long price,
         String message
 ) {
+
 }
+
