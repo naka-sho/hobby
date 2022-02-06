@@ -129,7 +129,7 @@
                                         {#for networkType in networkTypeList}
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="networkType" id="{networkType.type}" value="{networkType.type}"
-                                            {#if networkType.defaultChecked} checked {/if}>
+                                            {#if networkType.type == setting.networkType().type } checked {/if}>
                                             <label class="form-check-label" for="{networkType.type}">
                                                 {networkType.type}
                                             </label>

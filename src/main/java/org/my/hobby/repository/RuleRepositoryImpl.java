@@ -28,7 +28,7 @@ public class RuleRepositoryImpl implements RuleRepository {
                         ruleRecord.getHash(),
                         ruleRecord.getEpochAdjustment(),
                         ruleRecord.getPrivateKey(),
-                        NetworkType.networkTypeMap().getOrDefault(ruleRecord.getCryptoName(), NetworkType.TEST),
+                        NetworkType.networkTypeMap().getOrDefault(ruleRecord.getNetworkType(), NetworkType.TEST),
                         ruleRecord.getMosaic(),
                         ruleRecord.getNode(),
                         ruleRecord.getPointSum(),
