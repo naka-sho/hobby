@@ -3,7 +3,7 @@ package org.my.hobby.controller.crypto.currency;
 import org.my.hobby.core.CryptoType;
 import org.my.hobby.core.NetworkType;
 
-public record Setting(
+public record ViewSetting(
         CryptoType crypto,
         String hash,
         String epochAdjustment,
@@ -12,7 +12,6 @@ public record Setting(
         String mosaic,
         String node,
         Integer pointSum,
-        Integer point,
-        Integer pointUserCount
+        Integer pointAddCount
 ) {
 }

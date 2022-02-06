@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '443:443'
+    environment:
+      CLIENT_MAX_BODY_SIZE: 10M
+      WEBSOCKET: "true"
+      HSTS_MAX_AGE: 60
+      STAGE: local
+      # FORCE_RENEW: 'true'
+      DOMAINS: 'crypto.currency.com.127.0.0.1.nip.io -> http://host.docker.internal:8080,
+                '
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+volumes:
+  https-portal-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL
+  https-portal-closed-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL

@@ -7,6 +7,11 @@ tool:
 dev:
 	./gradlew quarkusDev
 
+router:
+	docker-compose \
+		-f docker-compose-router.yml \
+		up
+
 symbol:
 	cd symbol && node app.js
 

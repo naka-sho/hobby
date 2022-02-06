@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,86 +88,86 @@
                     <div class="card">
                         <h5 class="card-header">ルール設定</h5>
                         <div class="card-body">
-                            <form>
+                            <form action="/setting/update" method="post">
                                 <fieldset class="row mb-3">
                                     <label class="col-form-label col-sm-2 pt-0">通貨</label>
                                     <div class="col-sm-10">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="crypto" id="crypto" value="option1" checked>
-                                            <label class="form-check-label" for="crypto">
-                                                シンボル
-                                            </label>
-                                        </div>
+                                        {#for cryptoType in cryptoTypes}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="crypto" id="{cryptoType.name}" value="{cryptoType.name}" checked>
+                                                <label class="form-check-label" for="{cryptoType.name}">
+                                                    {cryptoType.shortName}
+                                                </label>
+                                            </div>
+                                        {/for}
                                     </div>
                                 </fieldset>
                                 <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">ハッシュ値</label>
+                                    <label for="hash" class="col-sm-2 col-form-label">ハッシュ値</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputEmail3" value="7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836">
+                                        <input type="text" class="form-control" id="hash" name="hash" value="{setting.hash()}">
                                         Network generation hash hex e.g. 7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputPassword3" class="col-sm-2 col-form-label">epochAdjustment</label>
+                                    <label for="epochAdjustment" class="col-sm-2 col-form-label">epochAdjustment</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputPassword3" value="1573430400">
+                                        <input type="text" class="form-control" id="epochAdjustment" name="epochAdjustment" value="{setting.epochAdjustment()}">
                                         the network's epoch adjustment (seconds). Defined in the network/properties. e.g. 1573430400
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="privateKey" class="col-sm-2 col-form-label">秘密鍵</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="privateKey" value="54CB7AA88F46CB140D3B9341835DAF61F6F4B1EC93D6270BE53C53B769072487">
+                                        <input type="password" class="form-control" id="privateKey" name="privateKey" value="{setting.privateKey()}">
                                         Private key from an account
                                     </div>
                                 </div>
                                 <fieldset class="row mb-3">
                                     <label class="col-form-label col-sm-2 pt-0">ネットワークタイプ</label>
                                     <div class="col-sm-10">
+                                        {#for networkType in networkTypeList}
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="env" id="env" value="option1" checked>
-                                            <label class="form-check-label" for="env">
-                                                テスト
+                                            <input class="form-check-input" type="radio" name="networkType" id="{networkType.type}" value="{networkType.type}"
+                                            {#if networkType.defaultChecked} checked {/if}>
+                                            <label class="form-check-label" for="{networkType.type}">
+                                                {networkType.type}
                                             </label>
                                         </div>
+                                        {/for}
                                     </div>
                                 </fieldset>
                                 <div class="row mb-3">
                                     <label for="mosaic" class="col-sm-2 col-form-label">モザイクID</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="mosaic" value="3A8416DB2D53B6C8">
+                                        <input type="text" class="form-control" id="mosaic" name="mosaic" value="{setting.mosaic()}">
                                         Create MosaicId from mosaic id in form of array of number (ex: [3646934825, 3576016193]) or the hexadecimal notation thereof in form of a string.
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="node" class="col-sm-2 col-form-label">ノード</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="node" value="https://sym-test.opening-line.jp:3001">
+                                        <input type="text" class="form-control" id="node" name="node" value="{setting.node()}">
                                         ex: [https://sym-test.opening-line.jp:3001]
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="pointSum" class="col-sm-2 col-form-label">総付与数</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="pointSum" value="100000000">
+                                        <input type="text" class="form-control" id="pointSum" name="pointSum" value="{setting.pointSum()}">
                                         ex: 100000000 → 1000XYM
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="point" class="col-sm-2 col-form-label">最低付与数</label>
+                                    <label for="pointAddCount" class="col-sm-2 col-form-label">同一ユーザの付与上限回数</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="point" value="100000">
-                                        ex: 100000 → 1XYM<br>
-                                        ex: APIで「3」とした場合「3*100000=3XYM」送金される
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="pointUserCount" class="col-sm-2 col-form-label">同一ユーザの付与上限回数</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="pointUserCount" value="1">
+                                        <input type="text" class="form-control" id="pointAddCount" name="pointAddCount" value="{setting.pointAddCount()}">
                                         ex: 0の場合は無制限
                                     </div>
                                 </div>
+                                {#if ruleId > 0}
+                                    <input type="hidden" name="ruleId" value="{ruleId}">
+                                {/if}
                                 <button type="submit" class="btn btn-primary">更新</button>
                             </form>
                         </div>
