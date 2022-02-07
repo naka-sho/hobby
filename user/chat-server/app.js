@@ -7,15 +7,22 @@ app.use(bodyParser.json());
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-app.post('/send', async (request, response) => {
+app.post('/chat/notice', async (request, response) => {
     console.log(request.body)
-    let sendAddrees = request.body.sendAddrees;
+    let sendAddress = request.body.sendAddress;
     let price = request.body.price;
-    let message = request.body.message;
-    io.emit("sendMessage", { name: '管理bot', text: "bbbb" });
-
+    io.emit("sendMessage", { name: '管理bot', text: sendAddress + "に" + price + "送信しました。"});
     response.statusCode = 200;
-    response.json({"message":"OK"});
+    response.json(request.body);
+});
+
+app.post('/chat/complete', async (request, response) => {
+    console.log(request.body)
+    let sendAddress = request.body.sendAddress;
+    let price = request.body.price;
+    io.emit("sendMessage", { name: '管理bot', text: sendAddress + "が送金完了しました"});
+    response.statusCode = 200;
+    response.json(request.body);
 });
 
 io.on('connection', (socket) => {

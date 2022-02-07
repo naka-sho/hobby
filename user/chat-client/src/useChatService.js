@@ -10,15 +10,15 @@ const useChatService = (initialMessage) => {
         console.log('Connectinng..');
         socketRef.current = io();
         socketRef.current.on('sendMessage', payload => {
-            console.log(payload);
+            // console.log(payload);
             setMessages(prevMessages => [...prevMessages, payload]);
         });
         socketRef.current.on('broadcast', payload => {
-            console.log('Recieved: ' + payload);
+            // console.log('Recieved: ' + payload);
             setMessages(prevMessages => [...prevMessages, payload]);
         });
         return () => {
-            console.log('Disconnecting..');
+            // console.log('Disconnecting..');
             socketRef.current.disconnect();
         };
     }, []);

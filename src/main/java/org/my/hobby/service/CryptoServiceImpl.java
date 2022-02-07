@@ -3,6 +3,7 @@ package org.my.hobby.service;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.my.hobby.core.Queue;
 import org.my.hobby.core.Symbol;
 import org.my.hobby.repository.CryptoRepository;
 
@@ -13,7 +14,12 @@ public class CryptoServiceImpl implements CryptoService {
     CryptoRepository cryptoRepository;
 
     @Override
-    public boolean send(Symbol symbol) {
-        return cryptoRepository.send(symbol);
+    public void send(Symbol symbol) {
+        cryptoRepository.send(symbol);
+    }
+
+    @Override
+    public void add(Queue queue) {
+        cryptoRepository.add(queue);
     }
 }

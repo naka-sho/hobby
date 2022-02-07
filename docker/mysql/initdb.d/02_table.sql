@@ -17,3 +17,36 @@ CREATE TABLE rule
     created_at datetime not null default current_timestamp,
     PRIMARY KEY (`rule_id`)
 );
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users
+(
+    user_id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    address VARCHAR(1024) not null ,
+    created_at datetime not null default current_timestamp,
+    PRIMARY KEY (`user_id`)
+);
+
+DROP TABLE IF EXISTS user_twitter;
+
+CREATE TABLE user_twitter
+(
+    user_twitter_id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    user_id INT(10) unsigned NOT NULL,
+    account VARCHAR(1024) not null ,
+    created_at datetime not null default current_timestamp,
+    PRIMARY KEY (`user_twitter_id`)
+);
+
+DROP TABLE IF EXISTS queue;
+
+CREATE TABLE queue
+(
+    queue_id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    address VARCHAR(1024) not null ,
+    transaction VARCHAR(1024) not null ,
+    url VARCHAR(1024) not null ,
+    created_at datetime not null default current_timestamp,
+    PRIMARY KEY (`queue_id`)
+);

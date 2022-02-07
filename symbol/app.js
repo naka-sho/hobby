@@ -39,18 +39,22 @@ app.post('/send', async (request, response) => {
     const NETWORK_TYPE = symbol.NetworkType.TEST_NET;
 
     console.log(request.body)
-    let sendAddrees = request.body.sendAddrees;
+    let sendAddress = request.body.sendAddress;
     let price = request.body.price;
     let message = request.body.message;
 
-    // let sendAddrees = "TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY";
+    console.log(sendAddress)
+    console.log(price)
+    console.log(message)
+
+    // let sendAddress = "TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY";
     // let price = 100000;
     // let message = "send test";
 
     let alice = symbol.Account.createFromPrivateKey(PRIVATE_KEY, NETWORK_TYPE);
     let tx = symbol.TransferTransaction.create(
         symbol.Deadline.create(EPOCH_ADJUSTMENT),
-        symbol.Address.createFromRawAddress(sendAddrees),
+        symbol.Address.createFromRawAddress(sendAddress),
         [
             new symbol.Mosaic(
                 new symbol.MosaicId(MOSAIC_ID),
@@ -70,6 +74,8 @@ app.post('/send', async (request, response) => {
                 const data = {
                     hash: transaction.hash,
                 };
+
+                console.log(TRANSACTION_STATUS + transaction.hash)
 
                 // axios
                 //     .post('http://localhost:3000/users', data)

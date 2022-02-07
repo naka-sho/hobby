@@ -36,3 +36,6 @@ nb-configuration.xml
 .env
 
 docker/mysql/db
+node_modules
+.eslintcache
+.DS_Store

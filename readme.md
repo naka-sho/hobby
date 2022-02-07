@@ -13,11 +13,12 @@ make prod
 ```shell
 make tool
 make dev
+make symbol-server
 make user-client
 make socket
 ```
 
-
 ### TODO
  - 現在、symbolしか対応していません。
  - アグリゲートには対応していません
+ - エラー処理は省略しています
