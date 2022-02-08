@@ -50,3 +50,15 @@ CREATE TABLE queue
     created_at datetime not null default current_timestamp,
     PRIMARY KEY (`queue_id`)
 );
+
+DROP TABLE IF EXISTS send_log;
+
+CREATE TABLE send_log
+(
+    send_log_id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    address VARCHAR(1024) not null ,
+    transaction VARCHAR(1024) not null ,
+    url VARCHAR(1024) not null ,
+    created_at datetime not null default current_timestamp,
+    PRIMARY KEY (`send_log_id`)
+);

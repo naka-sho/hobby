@@ -19,8 +19,7 @@ app.post('/chat/notice', async (request, response) => {
 app.post('/chat/complete', async (request, response) => {
     console.log(request.body)
     let sendAddress = request.body.sendAddress;
-    let price = request.body.price;
-    io.emit("sendMessage", { name: '管理bot', text: sendAddress + "が送金完了しました"});
+    io.emit("sendMessage", { name: '管理bot', text: sendAddress + "の送金ステータスが完了になりました"});
     response.statusCode = 200;
     response.json(request.body);
 });

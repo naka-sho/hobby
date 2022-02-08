@@ -1,0 +1,25 @@
+2022-02-08 10:24:50,659 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2022-02-08 10:24:50,682 INFO o.a.j.JMeter: Loading user properties from: /usr/local/Cellar/jmeter/5.4.1/libexec/bin/user.properties
+2022-02-08 10:24:50,683 INFO o.a.j.JMeter: Loading system properties from: /usr/local/Cellar/jmeter/5.4.1/libexec/bin/system.properties
+2022-02-08 10:24:50,688 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
+2022-02-08 10:24:50,688 INFO o.a.j.JMeter: Version 5.4.1
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: java.version=17.0.1
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: os.name=Mac OS X
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: os.arch=x86_64
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: os.version=10.15.7
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: file.encoding=UTF-8
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: java.awt.headless=null
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: Max memory     =1073741824
+2022-02-08 10:24:50,689 INFO o.a.j.JMeter: Available Processors =16
+2022-02-08 10:24:50,696 INFO o.a.j.JMeter: Default Locale=English (EN)
+2022-02-08 10:24:50,697 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2022-02-08 10:24:50,697 INFO o.a.j.JMeter: JMeterHome=/usr/local/Cellar/jmeter/5.4.1/libexec
+2022-02-08 10:24:50,697 INFO o.a.j.JMeter: user.dir  =/Users/shogo.nakao/home/hobby
+2022-02-08 10:24:50,697 INFO o.a.j.JMeter: PWD       =/Users/shogo.nakao/home/hobby
+2022-02-08 10:24:50,992 INFO o.a.j.JMeter: IP: 172.17.18.14 Name: 60-38772 FullName: 172.17.18.14
+2022-02-08 10:24:51,410 INFO o.a.j.JMeter: Setting LAF to: laf:com.apple.laf.AquaLookAndFeel
+2022-02-08 10:24:52,424 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2022-02-08 10:24:53,601 INFO o.j.r.JARSourceHTTP: Requesting https://jmeter-plugins.org/repo/?installID=mac_os_x-cab276deddf9fc0e6143a6a3265bf62d-gui
+2022-02-08 10:24:55,885 INFO o.j.r.PluginManager: Plugins Status: [jpgc-plugins-manager=1.6, jmeter-core=5.4.1, jmeter-ftp=5.4.1, jmeter-http=5.4.1, jmeter-jdbc=5.4.1, jmeter-jms=5.4.1, jmeter-junit=5.4.1, jmeter-java=5.4.1, jmeter-ldap=5.4.1, jmeter-mail=5.4.1, jmeter-mongodb=5.4.1, jmeter-native=5.4.1, jmeter-tcp=5.4.1, jmeter-components=5.4.1]
+2022-02-08 10:24:55,899 INFO o.j.r.PluginManagerMenuItem: Plugins Manager has upgrades: [jpgc-plugins-manager]

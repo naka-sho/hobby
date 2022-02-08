@@ -16,7 +16,7 @@ symbol-server:
 	cd symbol && npm install && node app.js
 
 user-client:
-	cd user/chat-client && yarn install && yarn start --port=3002
+	cd user/chat-client && yarn install && yarn start
 
 socket:
 	cd user/chat-server && npm install && node app.js

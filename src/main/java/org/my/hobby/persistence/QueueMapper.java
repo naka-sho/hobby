@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.my.hobby.core.Queue;
 
 @Mapper
 public interface QueueMapper {
@@ -15,7 +14,7 @@ public interface QueueMapper {
     @Select("""
             select * from queue order by queue_id
             """)
-    List<Queue> all();
+    List<QueueRecord> all();
 
     @Insert("""
             INSERT INTO queue
