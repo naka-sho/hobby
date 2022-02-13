@@ -10,6 +10,7 @@ import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
 import org.my.hobby.repository.CryptoRepository;
 import org.my.hobby.repository.QueueRepository;
+import org.my.hobby.repository.UserRepository;
 
 @Singleton
 public class CryptoServiceImpl implements CryptoService {
@@ -18,8 +19,15 @@ public class CryptoServiceImpl implements CryptoService {
     CryptoRepository cryptoRepository;
 
     @Inject
+    UserRepository userRepository;
+
+    @Inject
     QueueRepository queueRepository;
 
+    @Override
+    public String address() {
+        return userRepository.address();
+    }
 
     @Override
     public void send(Rule rule, Symbol symbol) {

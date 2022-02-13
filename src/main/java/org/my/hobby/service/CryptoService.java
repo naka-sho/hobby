@@ -7,6 +7,8 @@ import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
 
 public interface CryptoService {
+    String address();
+
     void send(Rule rule, Symbol symbol);
 
     void add(Queue queue);

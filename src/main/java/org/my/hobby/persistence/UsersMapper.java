@@ -1,6 +1,7 @@
 package org.my.hobby.persistence;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -13,12 +14,20 @@ public interface UsersMapper {
 
     @Select("""
             select
-                users.*,
-                user_twitter.account as twitter_account
+                users.*
             from
                 users
-                    inner join user_twitter
-                        on users.user_id = user_twitter.user_id
+            order by
+                user_id
+            limit 1 
+            """)
+    Optional<UserListRecord> user();
+
+    @Select("""
+            select
+                users.*
+            from
+                users
             """)
     List<UserListRecord> all();
 

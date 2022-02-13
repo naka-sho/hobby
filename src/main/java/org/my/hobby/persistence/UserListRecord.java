@@ -11,6 +11,5 @@ import lombok.experimental.Accessors;
 public class UserListRecord {
     private Long userId;
     private String address;
-    private String twitterAccount;
     private LocalDateTime createdAt;
 }

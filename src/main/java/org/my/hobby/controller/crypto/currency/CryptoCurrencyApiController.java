@@ -1,16 +1,13 @@
 package org.my.hobby.controller.crypto.currency;
 
 import javax.inject.Inject;
-import javax.validation.Validator;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.my.hobby.core.Queue;
 import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
@@ -18,7 +15,6 @@ import org.my.hobby.service.CryptoService;
 import org.my.hobby.service.RuleService;
 
 record SendRequest(
-        @NotBlank(message = "sendAddress not found") String sendAddress,
         @Min(0L) Long price,
         String message
 ) {
@@ -50,7 +46,9 @@ public class CryptoCurrencyApiController {
     @Path("send")
     @Produces(MediaType.APPLICATION_JSON)
     public String send(SendRequest sendRequest) {
-        Symbol symbol = new Symbol(sendRequest.sendAddress(),
+
+
+        Symbol symbol = new Symbol(cryptoService.address(),
                 sendRequest.price(),
                 sendRequest.message()
         );
