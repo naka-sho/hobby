@@ -30,13 +30,9 @@ public class RuleRepositoryImpl implements RuleRepository {
                         ruleRecord.getPrivateKey(),
                         NetworkType.networkTypeMap().getOrDefault(ruleRecord.getNetworkType(), NetworkType.TEST),
                         ruleRecord.getMosaic(),
-                        ruleRecord.getNode(),
-                        ruleRecord.getPointSum(),
-                        ruleRecord.getPointAddCount()
+                        ruleRecord.getNode()
                 ))
-                .orElseGet(() ->
-                        new Rule()
-                );
+                .orElseThrow();
     }
 
     @Override
@@ -77,8 +73,6 @@ public class RuleRepositoryImpl implements RuleRepository {
                 .setPrivateKey(rule.privateKey())
                 .setNetworkType(rule.networkType().getType())
                 .setMosaic(rule.mosaic())
-                .setNode(rule.node())
-                .setPointSum(rule.pointSum())
-                .setPointAddCount(rule.pointAddCount());
+                .setNode(rule.node());
     }
 }

@@ -63,13 +63,13 @@
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
+                        <a class="nav-link active" aria-current="page" href="/setting">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span class="ml-2">設定</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
                             <span class="ml-2">送信先</span>
                         </a>
@@ -149,20 +149,6 @@
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="node" name="node" value="{setting.node()}">
                                         ex: [https://sym-test.opening-line.jp:3001]
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="pointSum" class="col-sm-2 col-form-label">総付与数</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="pointSum" name="pointSum" value="{setting.pointSum()}">
-                                        ex: 100000000 → 1000XYM
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="pointAddCount" class="col-sm-2 col-form-label">同一ユーザの付与上限回数</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="pointAddCount" name="pointAddCount" value="{setting.pointAddCount()}">
-                                        ex: 0の場合は無制限
                                     </div>
                                 </div>
                                 {#if ruleId > 0}

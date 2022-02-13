@@ -12,8 +12,6 @@ CREATE TABLE rule
     network_type VARCHAR(1024) not null ,
     mosaic VARCHAR(1024) not null ,
     node VARCHAR(1024) not null ,
-    point_sum bigint not null ,
-    point_add_count INT(1) not null ,
     created_at datetime not null default current_timestamp,
     PRIMARY KEY (`rule_id`)
 );
@@ -26,6 +24,16 @@ CREATE TABLE users
     address VARCHAR(1024) not null ,
     created_at datetime not null default current_timestamp,
     PRIMARY KEY (`user_id`)
+);
+
+DROP TABLE IF EXISTS error_address;
+
+CREATE TABLE error_address
+(
+    error_address_id bigint unsigned NOT NULL AUTO_INCREMENT,
+    address VARCHAR(1024) not null ,
+    created_at datetime not null default current_timestamp,
+    PRIMARY KEY (`error_address_id`)
 );
 
 DROP TABLE IF EXISTS user_twitter;

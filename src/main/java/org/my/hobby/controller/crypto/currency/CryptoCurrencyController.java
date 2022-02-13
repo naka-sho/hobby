@@ -62,9 +62,7 @@ public class CryptoCurrencyController {
                 rule.privateKey(),
                 rule.networkType(),
                 rule.mosaic(),
-                rule.node(),
-                rule.pointSum(),
-                rule.pointAddCount()
+                rule.node()
         );
         return Templates.setting(CryptoType.cryptoTypes(), NetworkType.networkTypeList(), setting, rule.ruleId());
     }
@@ -86,8 +84,6 @@ public class CryptoCurrencyController {
             @FormParam("networkType") @NotNull String networkType,
             @FormParam("mosaic") @NotNull String mosaic,
             @FormParam("node") @NotNull String node,
-            @FormParam("pointSum") @NotNull Integer pointSum,
-            @FormParam("pointAddCount") @NotNull Integer pointAddCount,
             @Context HttpRequest request) throws URISyntaxException {
 
         Rule rule = new Rule(ruleId
@@ -97,9 +93,7 @@ public class CryptoCurrencyController {
                 , privateKey
                 , NetworkType.networkTypeMap().getOrDefault(networkType, NetworkType.TEST)
                 , mosaic
-                , node
-                , pointSum
-                , pointAddCount);
+                , node);
 
         ruleService.update(rule);
 

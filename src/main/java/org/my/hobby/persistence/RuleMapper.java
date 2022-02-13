@@ -20,8 +20,6 @@ public interface RuleMapper {
             network_type,
             mosaic,
             node,
-            point_sum,
-            point_add_count,
             created_at
         FROM
             rule
@@ -45,9 +43,7 @@ public interface RuleMapper {
                 private_key,
                 network_type,
                 mosaic,
-                node,
-                point_sum,
-                point_add_count)
+                node)
             VALUES
                 (
                 #{rule_id},
@@ -57,9 +53,7 @@ public interface RuleMapper {
                 #{rule.privateKey},
                 #{rule.networkType},
                 #{rule.mosaic},
-                #{rule.node},
-                #{rule.pointSum},
-                #{rule.pointAddCount}
+                #{rule.node}
                 )
             """)
     void insertPk(@Param("rule_id") Long ruleId,
@@ -73,9 +67,7 @@ public interface RuleMapper {
                 private_key,
                 network_type,
                 mosaic,
-                node,
-                point_sum,
-                point_add_count)
+                node)
             VALUES
                 (
                 #{rule.cryptoName},
@@ -84,9 +76,7 @@ public interface RuleMapper {
                 #{rule.privateKey},
                 #{rule.networkType},
                 #{rule.mosaic},
-                #{rule.node},
-                #{rule.pointSum},
-                #{rule.pointAddCount}
+                #{rule.node}
                 )
             """)
     void insert(@Param("rule") RuleRecord rule);

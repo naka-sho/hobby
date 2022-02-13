@@ -7,10 +7,7 @@ public record Setting(
         String privateKey,
         NetworkType networkType,
         String mosaic,
-        String node,
-        Integer pointSum,
-        Integer point,
-        Integer pointAddCount
+        String node
 ) {
     /**
      * デフォルト値設定
@@ -23,10 +20,7 @@ public record Setting(
                 "54CB7AA88F46CB140D3B9341835DAF61F6F4B1EC93D6270BE53C53B769072487",
                 NetworkType.TEST,
                 "3A8416DB2D53B6C8",
-                "https://sym-test.opening-line.jp:3001",
-                100000000,
-                100000,
-                5
+                "https://sym-test.opening-line.jp:3001"
         );
     }
 }

@@ -46,50 +46,57 @@ app.post('/send', async (request, response) => {
     // let price = 100000;
     // let message = "send test";
 
-    let alice = symbol.Account.createFromPrivateKey(PRIVATE_KEY, NETWORK_TYPE);
-    let tx = symbol.TransferTransaction.create(
-        symbol.Deadline.create(EPOCH_ADJUSTMENT),
-        symbol.Address.createFromRawAddress(sendAddress),
-        [
-            new symbol.Mosaic(
-                new symbol.MosaicId(MOSAIC_ID),
-                symbol.UInt64.fromUint(price)
-            )
-        ],
-        symbol.PlainMessage.create(message),
-        NETWORK_TYPE,
-        symbol.UInt64.fromUint(100000)
-    );
-    let signedTx = alice.sign(tx, GENERATION_HASH);
-    new symbol.TransactionHttp(NODE)
-        .announce(signedTx)
-        .subscribe(
-            (x) => {
-                const transaction = new Transaction(signedTx.hash);
-                const data = {
-                    address: sendAddress,
-                    price : price,
-                    transaction: transaction.hash,
-                    url: TRANSACTION_STATUS + transaction.hash,
-                };
-
-                console.log(TRANSACTION_STATUS + transaction.hash);
-
-                axios
-                    .post('http://localhost:8080/api/queue/add', data)
-                    .then(response => {
-                    })
-                    .catch(reason => {
-                        console.log(transaction)
-                        console.log(reason)
-                    });
-            },
-            (err) => {
-                console.log(err)
-            }
+    try {
+        let alice = symbol.Account.createFromPrivateKey(PRIVATE_KEY, NETWORK_TYPE);
+        let tx = symbol.TransferTransaction.create(
+            symbol.Deadline.create(EPOCH_ADJUSTMENT),
+            symbol.Address.createFromRawAddress(sendAddress),
+            [
+                new symbol.Mosaic(
+                    new symbol.MosaicId(MOSAIC_ID),
+                    symbol.UInt64.fromUint(price)
+                )
+            ],
+            symbol.PlainMessage.create(message),
+            NETWORK_TYPE,
+            symbol.UInt64.fromUint(100000)
         );
-    response.statusCode = 200;
-    response.json({"message": "OK"});
+        let signedTx = alice.sign(tx, GENERATION_HASH);
+        new symbol.TransactionHttp(NODE)
+            .announce(signedTx)
+            .subscribe(
+                (x) => {
+                    const transaction = new Transaction(signedTx.hash);
+                    const data = {
+                        address: sendAddress,
+                        price : price,
+                        transaction: transaction.hash,
+                        url: TRANSACTION_STATUS + transaction.hash,
+                    };
+
+                    console.log(TRANSACTION_STATUS + transaction.hash);
+
+                    axios
+                        .post('http://localhost:8080/api/queue/add', data)
+                        .then(response => {
+                        })
+                        .catch(reason => {
+                            console.log(transaction)
+                            console.log(reason)
+                        });
+                },
+                (err) => {
+                    console.log(err)
+                }
+            );
+        response.statusCode = 200;
+        response.json({"message": "OK"});
+        return
+    } catch (error) {
+        response.statusCode = 500;
+        response.json({"message": "NG"});
+        console.error(error);
+    }
 });
 
 class Transaction {

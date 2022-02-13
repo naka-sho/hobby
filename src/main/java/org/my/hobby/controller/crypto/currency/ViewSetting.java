@@ -10,8 +10,6 @@ public record ViewSetting(
         String privateKey,
         NetworkType networkType,
         String mosaic,
-        String node,
-        Integer pointSum,
-        Integer pointAddCount
+        String node
 ) {
 }

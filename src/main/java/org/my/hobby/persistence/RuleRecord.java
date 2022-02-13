@@ -18,7 +18,5 @@ public class RuleRecord {
     private String networkType;
     private String mosaic;
     private String node;
-    private Integer pointSum;
-    private Integer pointAddCount;
     private LocalDateTime createdAt;
 }
