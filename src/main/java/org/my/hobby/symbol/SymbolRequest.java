@@ -17,6 +17,5 @@ public interface SymbolRequest {
     @POST
     @Path("/send")
     @Produces(MediaType.APPLICATION_JSON)
-    String send(
-            PayloadSendRequest payloadSendRequest);
+    String send(PayloadSendRequest payloadSendRequest);
 }

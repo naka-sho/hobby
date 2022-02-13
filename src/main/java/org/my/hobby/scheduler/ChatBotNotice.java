@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.quarkus.logging.Log;
 import io.quarkus.scheduler.Scheduled;
 import io.quarkus.scheduler.ScheduledExecution;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -33,12 +35,11 @@ public class ChatBotNotice {
 
     private boolean process = false;
 
-    @ConfigProperty(name = "chat.server.url.complete")
+    @ConfigProperty(name = "chat.server.url.notice")
     String reqChatCompleteUrl;
 
     /**
      * 仮想通貨送信結果を取得し、その結果をチャットに通知する
-     *
      */
     @Scheduled(cron = "{cron.expr}")
     void cronJobWithExpressionInConfig() {
@@ -62,7 +63,7 @@ public class ChatBotNotice {
                 TransactionStatus transactionStatus = objectMapper.readValue(response.body(), TransactionStatus.class);
                 System.out.println(transactionStatus);
 
-                if(!TransactionStatusGroupType.confirmed(transactionStatus.getGroup())){
+                if (!TransactionStatusGroupType.confirmed(transactionStatus.getGroup())) {
                     this.process = false;
                     return;
                 }
@@ -71,11 +72,19 @@ public class ChatBotNotice {
                         .version(HttpClient.Version.HTTP_1_1)
                         .build();
 
+                ReqChatComplete reqChatCompleteParameters = new ReqChatComplete(
+                        "管理人",
+                        "アドレス : " + transactionStatus.getHash() + "の送金ステータスが完了になりました"
+                );
+
+                Log.debug(reqChatCompleteParameters.toJson());
+
                 HttpRequest reqChatComplete = HttpRequest.newBuilder()
                         .uri(URI.create(reqChatCompleteUrl))
-                        .header("Content-Type","application/json")
+                        .header("Content-Type", "application/json")
                         .POST(HttpRequest.BodyPublishers.ofString(
-                                "{ \"sendAddress\" : \"" + transactionStatus.getHash() + "\" }"))
+                                reqChatCompleteParameters.toJson()))
+//                                "{ \"sendAddress\" : \"" + transactionStatus.getHash() + "\" }"))
                         .build();
 
                 try {
@@ -96,10 +105,24 @@ public class ChatBotNotice {
                 System.out.println(ex.getMessage());
                 this.process = false;
                 return;
-            }finally {
+            } finally {
                 this.process = false;
                 return;
             }
         });
     }
+
+    private record ReqChatComplete(
+            String name,
+            String message
+    ) {
+
+        public String toJson() {
+            return """
+                    { "name" : "%s", "message" : "%s" }
+                    """.formatted(name, message);
+        }
+    }
+
+    ;
 }
