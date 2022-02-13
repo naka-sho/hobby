@@ -8,5 +8,5 @@ public interface UserService {
     void addList(List<String> userList);
     void deleteList(List<String> userList);
     void delete(String address);
-    public List<User> userSendList();
+    List<User> userSendList();
 }

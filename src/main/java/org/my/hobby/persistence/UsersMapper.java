@@ -58,8 +58,8 @@ public interface UsersMapper {
                     users
                 WHERE
                     address in
-                    <foreach item = 'item' index = 'index' collection='usersList' open='' separator=',' close=''>
-                        (#{item.address})
+                    <foreach item = 'item' index = 'index' collection='usersList' open='(' separator=',' close=')'>
+                        #{item.address}
                     </foreach>
             </script>
             """)

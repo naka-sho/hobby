@@ -2,6 +2,7 @@ package org.my.hobby.controller.crypto.currency;
 
 import javax.inject.Inject;
 import javax.validation.Validator;
+import javax.validation.constraints.Min;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,7 +26,9 @@ import org.jboss.resteasy.spi.HttpRequest;
 import org.my.hobby.core.CryptoType;
 import org.my.hobby.core.NetworkType;
 import org.my.hobby.core.Rule;
+import org.my.hobby.core.Symbol;
 import org.my.hobby.core.User;
+import org.my.hobby.service.CryptoService;
 import org.my.hobby.service.RuleService;
 import org.my.hobby.service.UserService;
 
@@ -42,6 +45,9 @@ public class CryptoCurrencyController {
 
     @Inject
     UserService userService;
+
+    @Inject
+    CryptoService cryptoService;
 
     @CheckedTemplate
     public static class Templates {
@@ -137,9 +143,12 @@ public class CryptoCurrencyController {
                 .map(
                         e -> e.trim()
                 )
+                .filter(e -> !"".equals(e))
                 .toList();
 
-        userService.addList(userList);
+        if(!userList.isEmpty()){
+            userService.addList(userList);
+        }
 
         URI requestUrI = request.getUri().getRequestUri();
         URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
@@ -162,9 +171,12 @@ public class CryptoCurrencyController {
                 .map(
                         e -> e.trim()
                 )
+                .filter(e -> !"".equals(e))
                 .toList();
 
-        userService.deleteList(userList);
+        if(!userList.isEmpty()){
+            userService.deleteList(userList);
+        }
 
         URI requestUrI = request.getUri().getRequestUri();
         URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
@@ -181,8 +193,23 @@ public class CryptoCurrencyController {
     @POST
     @Path("send/user")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response sendUser(@FormParam("price") @NotNull Long price,
+    public Response sendUser(@FormParam("price") @Min(0L) @NotNull Long price,
                              @Context HttpRequest request) throws URISyntaxException {
+
+        List<User> users = userService.userSendList();
+
+        Rule rule = ruleService.rule();
+
+        users.stream().parallel()
+                .filter(e -> !e.send())
+                .forEach(e -> {
+                    Symbol symbol = new Symbol(e.address(),
+                            price,
+                            "一括送金"
+                    );
+                    cryptoService.send(rule, symbol);
+                });
+
         URI requestUrI = request.getUri().getRequestUri();
         URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
         return Response.status(301)
