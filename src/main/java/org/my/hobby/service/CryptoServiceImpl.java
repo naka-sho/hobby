@@ -36,6 +36,6 @@ public class CryptoServiceImpl implements CryptoService {
 
     @Override
     public void deleteQueue(Long queueId) {
-
+        queueRepository.delete(queueId);
     }
 }

@@ -29,7 +29,7 @@ public interface QueueMapper {
     void insert(@Param("queue") QueueRecord queueRecord);
 
     @Delete("""
-            delete from queue where queue = #{queueId}
+            delete from queue where queue_id = #{queueId}
             """)
     void delete(@Param("queueId") Long queueId);
 }

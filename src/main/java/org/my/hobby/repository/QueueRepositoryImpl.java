@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import io.quarkus.logging.Log;
 import org.my.hobby.core.Queue;
 import org.my.hobby.persistence.QueueMapper;
 import org.my.hobby.persistence.QueueRecord;
@@ -33,7 +34,8 @@ public class QueueRepositoryImpl implements QueueRepository
     public List<Queue> all() {
         List<QueueRecord> all = queueMapper.all();
         List<Queue> collect = all.stream().map(e ->
-                        new Queue(e.getAddress(),
+                        new Queue(e.getQueueId(),
+                                e.getAddress(),
                                 e.getTransaction(),
                                 e.getUrl()))
                 .collect(Collectors.toList());
@@ -42,6 +44,7 @@ public class QueueRepositoryImpl implements QueueRepository
 
     @Override
     public void delete(Long queueId) {
+        Log.debug("削除開始");
         queueMapper.delete(queueId);
     }
 

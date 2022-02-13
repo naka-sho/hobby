@@ -29,6 +29,7 @@ app.get('/net/type', async (request, response) => {
  * エラーの場合はconsoleログに出力するだけで、OKを返す
  */
 app.post('/send', async (request, response) => {
+    console.log(request.body)
     // https://testnet.symbol.tools/?recipient=TARK3GGU52N6FMAHAAGOWGOCDZ7WEKFKYVTNWPA&amount=10000
     const GENERATION_HASH = '7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836';
     const EPOCH_ADJUSTMENT = 1637848847;
@@ -37,15 +38,9 @@ app.post('/send', async (request, response) => {
     const NODE = "https://sym-test.opening-line.jp:3001";
     const TRANSACTION_STATUS = NODE + "/transactionStatus/";
     const NETWORK_TYPE = symbol.NetworkType.TEST_NET;
-
-    console.log(request.body)
     let sendAddress = request.body.sendAddress;
     let price = request.body.price;
     let message = request.body.message;
-
-    console.log(sendAddress)
-    console.log(price)
-    console.log(message)
 
     // let sendAddress = "TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY";
     // let price = 100000;
@@ -72,20 +67,19 @@ app.post('/send', async (request, response) => {
             (x) => {
                 const transaction = new Transaction(signedTx.hash);
                 const data = {
-                    hash: transaction.hash,
+                    address: sendAddress,
+                    transaction: transaction.hash,
+                    url: TRANSACTION_STATUS + transaction.hash,
                 };
 
-                console.log(TRANSACTION_STATUS + transaction.hash)
-
-                // axios
-                //     .post('http://localhost:3000/users', data)
-                //     .then(response => {
-                //         // console.log(response);
-                //     })
-                //     .catch(reason => {
-                //         // console.log(transaction)
-                //         // console.log(reason)
-                //     });
+                axios
+                    .post('http://localhost:8080/api/queue/add', data)
+                    .then(response => {
+                    })
+                    .catch(reason => {
+                        console.log(transaction)
+                        console.log(reason)
+                    });
             },
             (err) => {
                 console.log(err)
