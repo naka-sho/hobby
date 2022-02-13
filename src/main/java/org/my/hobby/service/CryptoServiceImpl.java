@@ -19,6 +19,7 @@ public class CryptoServiceImpl implements CryptoService {
     @Inject
     QueueRepository queueRepository;
 
+
     @Override
     public void send(Symbol symbol) {
         cryptoRepository.send(symbol);
@@ -37,5 +38,10 @@ public class CryptoServiceImpl implements CryptoService {
     @Override
     public void deleteQueue(Long queueId) {
         queueRepository.delete(queueId);
+    }
+
+    @Override
+    public void createLog(Queue queue) {
+        queueRepository.createLog(queue);
     }
 }

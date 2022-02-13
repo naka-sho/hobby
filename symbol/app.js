@@ -68,9 +68,12 @@ app.post('/send', async (request, response) => {
                 const transaction = new Transaction(signedTx.hash);
                 const data = {
                     address: sendAddress,
+                    price : price,
                     transaction: transaction.hash,
                     url: TRANSACTION_STATUS + transaction.hash,
                 };
+
+                console.log(TRANSACTION_STATUS + transaction.hash);
 
                 axios
                     .post('http://localhost:8080/api/queue/add', data)

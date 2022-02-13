@@ -10,10 +10,12 @@ public interface SendLogMapper {
             INSERT INTO send_log
                 (address,
                 transaction,
+                price,
                 url)
             VALUES
                 (#{sendLog.address},
                 #{sendLog.transaction},
+                #{sendLog.price},
                 #{sendLog.url})
     """)
     void insert(@Param("sendLog") SendLogRecord sendLogRecord);

@@ -13,4 +13,6 @@ public interface CryptoService {
     List<Queue> allQueue();
 
     void deleteQueue(Long queueId);
+
+    void createLog(Queue queue);
 }

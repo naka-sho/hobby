@@ -26,6 +26,7 @@ public class QueueRepositoryImpl implements QueueRepository
         QueueRecord queueRecord = new QueueRecord()
                 .setAddress(queue.address())
                 .setTransaction(queue.transaction())
+                .setPrice(queue.price())
                 .setUrl(queue.url());
         queueMapper.insert(queueRecord);
     }
@@ -37,6 +38,7 @@ public class QueueRepositoryImpl implements QueueRepository
                         new Queue(e.getQueueId(),
                                 e.getAddress(),
                                 e.getTransaction(),
+                                e.getPrice(),
                                 e.getUrl()))
                 .collect(Collectors.toList());
         return collect;
@@ -53,6 +55,7 @@ public class QueueRepositoryImpl implements QueueRepository
         SendLogRecord sendLogRecord = new SendLogRecord()
                 .setAddress(queue.address())
                 .setTransaction(queue.transaction())
+                .setPrice(queue.price())
                 .setUrl(queue.url());
         sendLogMapper.insert(sendLogRecord);
     }

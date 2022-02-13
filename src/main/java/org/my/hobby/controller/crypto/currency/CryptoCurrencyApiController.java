@@ -25,6 +25,7 @@ record SendRequest(
 record AddQueueRequest(
         @NotBlank(message = "address not found") String address,
         @NotBlank(message = "transaction not found") String transaction,
+        @NotBlank(message = "transaction not found") Long price,
         @NotBlank(message = "url not found") String url
 ) {
 }
@@ -63,9 +64,11 @@ public class CryptoCurrencyApiController {
     public String addQueue(AddQueueRequest addQueueRequest) {
         Queue queue = new Queue(addQueueRequest.address(),
                 addQueueRequest.transaction(),
+                addQueueRequest.price(),
                 addQueueRequest.url()
         );
         cryptoService.add(queue);
+        cryptoService.createLog(queue);
         return "OK";
     }
 }

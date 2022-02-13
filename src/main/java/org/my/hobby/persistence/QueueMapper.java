@@ -20,10 +20,12 @@ public interface QueueMapper {
             INSERT INTO queue
                 (address,
                 transaction,
+                price,
                 url)
             VALUES
                 (#{queue.address},
                 #{queue.transaction},
+                #{queue.price},
                 #{queue.url})
             """)
     void insert(@Param("queue") QueueRecord queueRecord);

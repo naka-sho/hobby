@@ -12,6 +12,7 @@ public class QueueRecord {
     private Long queueId;
     private String address;
     private String transaction;
+    private Long price;
     private String url;
     private LocalDateTime createdAt;
 }
