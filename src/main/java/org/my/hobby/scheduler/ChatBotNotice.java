@@ -49,7 +49,7 @@ public class ChatBotNotice {
 
             ReqChatComplete reqChatCompleteParameters = new ReqChatComplete(
                     "管理人",
-                    "アドレス : " + transactionStatus.getHash() + "の送金ステータスが完了になりました"
+                    transactionStatus.getHash() + " に " + e.price() + " 送金完了"
             );
 
             this.requestChatComplete(reqChatCompleteUrl, reqChatCompleteParameters);
