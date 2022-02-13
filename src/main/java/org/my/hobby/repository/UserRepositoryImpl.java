@@ -38,7 +38,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteList(List<String> userList) {
+        List<UsersRecord> collect = userList.stream().map(e ->
+                new UsersRecord().setAddress(e)
+        ).collect(Collectors.toList());
 
+        usersMapper.delete(collect);
     }
 
     @Override

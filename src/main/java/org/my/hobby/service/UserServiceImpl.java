@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteList(List<String> userList) {
-
+        userRepository.deleteList(userList);
     }
 
     @Override

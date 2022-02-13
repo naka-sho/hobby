@@ -133,8 +133,6 @@ public class CryptoCurrencyController {
     @Produces(MediaType.TEXT_PLAIN)
     public Response addUser(@FormParam("addUser") @NotNull String addUser,
                             @Context HttpRequest request) throws URISyntaxException {
-        URI requestUrI = request.getUri().getRequestUri();
-
         List<String> userList = Arrays.stream(addUser.split("\r\n|\n"))
                 .map(
                         e -> e.trim()
@@ -143,6 +141,7 @@ public class CryptoCurrencyController {
 
         userService.addList(userList);
 
+        URI requestUrI = request.getUri().getRequestUri();
         URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
         return Response.status(301)
                 .location(redirectUrI)
@@ -159,8 +158,15 @@ public class CryptoCurrencyController {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteUser(@FormParam("deleteUser") @NotNull String deleteUser,
                                @Context HttpRequest request) throws URISyntaxException {
-        URI requestUrI = request.getUri().getRequestUri();
+        List<String> userList = Arrays.stream(deleteUser.split("\r\n|\n"))
+                .map(
+                        e -> e.trim()
+                )
+                .toList();
 
+        userService.deleteList(userList);
+
+        URI requestUrI = request.getUri().getRequestUri();
         URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
         return Response.status(301)
                 .location(redirectUrI)
