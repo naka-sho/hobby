@@ -39,10 +39,6 @@ public class CryptoCurrencyController {
                                                       Long ruleId);
 
         public static native TemplateInstance list(Item item);
-
-        public static native TemplateInstance add(Item item);
-
-        public static native TemplateInstance delete(Item item);
     }
 
     /**
@@ -117,39 +113,20 @@ public class CryptoCurrencyController {
     }
 
     /**
-     * アドレス登録
-     *
-     * @return
-     */
-    @GET
-    @Path("add")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance add() {
-        return Templates.add(new Item("test", new BigDecimal("1.234")));
-    }
-
-    /**
      * アドレス登録実行
      *
      * @return
      */
     @POST
     @Path("add/user")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance addUser() {
-        return Templates.list(new Item("test", new BigDecimal("1.234")));
-    }
-
-    /**
-     * アドレス削除
-     *
-     * @return
-     */
-    @GET
-    @Path("delete")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance delete() {
-        return Templates.delete(new Item("test", new BigDecimal("1.234")));
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response addUser(@FormParam("addUser") @NotNull String addUser,
+                            @Context HttpRequest request) throws URISyntaxException {
+        URI requestUrI = request.getUri().getRequestUri();
+        URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
+        return Response.status(301)
+                .location(redirectUrI)
+                .build();
     }
 
     /**
@@ -157,10 +134,15 @@ public class CryptoCurrencyController {
      *
      * @return
      */
-    @GET
+    @POST
     @Path("delete/user")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance deleteUser() {
-        return Templates.list(new Item("test", new BigDecimal("1.234")));
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteUser(@FormParam("deleteUser") @NotNull String deleteUser,
+                               @Context HttpRequest request) throws URISyntaxException {
+        URI requestUrI = request.getUri().getRequestUri();
+        URI redirectUrI = new URI("https", requestUrI.getHost(), "/", "");
+        return Response.status(301)
+                .location(redirectUrI)
+                .build();
     }
 }

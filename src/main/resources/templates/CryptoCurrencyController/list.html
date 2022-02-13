@@ -84,6 +84,24 @@
                     <li class="breadcrumb-item active" aria-current="page">アドレス一覧</li>
                 </ol>
             </nav>
+            <form action="add/user" id="add" method="post">
+                <div class="mb-3">
+                    <label for="addTextarea" class="form-label">追加したいアドレスを改行区切りで貼り付けてください</label>
+                    <textarea class="form-control" id="addTextarea" name="addUser" rows="3" form="add"></textarea>
+                </div>
+            </form>
+            <form action="delete/user" id="delete" method="post">
+                <div class="mb-3">
+                    <label for="deleteTextarea" class="form-label">削除したいアドレスを改行区切りで貼り付けてください</label>
+                    <textarea class="form-control" id="deleteTextarea" name="deleteUser" rows="3" form="delete"></textarea>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-12 col-xl-12 mb-4 mb-lg-0">
+                    <button type="submit" class="btn btn-primary" form="add">更新</button>
+                    <button type="submit" class="btn btn-danger" form="delete">削除</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 col-xl-12 mb-4 mb-lg-0">
                     <div class="card">
@@ -125,7 +143,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#" class="btn btn-block btn-light">View all(+100)</a>
                         </div>
                     </div>
                 </div>
