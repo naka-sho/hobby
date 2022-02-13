@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import java.util.List;
 
 import org.my.hobby.core.Queue;
+import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
 import org.my.hobby.repository.CryptoRepository;
 import org.my.hobby.repository.QueueRepository;
@@ -21,8 +22,8 @@ public class CryptoServiceImpl implements CryptoService {
 
 
     @Override
-    public void send(Symbol symbol) {
-        cryptoRepository.send(symbol);
+    public void send(Rule rule, Symbol symbol) {
+        cryptoRepository.send(rule, symbol);
     }
 
     @Override

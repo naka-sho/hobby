@@ -31,38 +31,48 @@ app.get('/net/type', async (request, response) => {
 app.post('/send', async (request, response) => {
     console.log(request.body)
     // https://testnet.symbol.tools/?recipient=TARK3GGU52N6FMAHAAGOWGOCDZ7WEKFKYVTNWPA&amount=10000
-    const GENERATION_HASH = '7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836';
-    const EPOCH_ADJUSTMENT = 1637848847;
-    const PRIVATE_KEY = "54CB7AA88F46CB140D3B9341835DAF61F6F4B1EC93D6270BE53C53B769072487";
-    const MOSAIC_ID = "3A8416DB2D53B6C8";
-    const NODE = "https://sym-test.opening-line.jp:3001";
-    const TRANSACTION_STATUS = NODE + "/transactionStatus/";
-    const NETWORK_TYPE = symbol.NetworkType.TEST_NET;
-    let sendAddress = request.body.sendAddress;
-    let price = request.body.price;
-    let message = request.body.message;
-
+    // const generation_hash = '7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836';
+    // const epoch_adjustment = 1637848847;
+    // const private_key = "54CB7AA88F46CB140D3B9341835DAF61F6F4B1EC93D6270BE53C53B769072487";
+    // const mosaic_id = "3A8416DB2D53B6C8";
+    // const node = "https://sym-test.opening-line.jp:3001";
+    // const transaction_status = node + "/transactionStatus/";
+    // const network_type = symbol.NetworkType.TEST_NET;
     // let sendAddress = "TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY";
     // let price = 100000;
     // let message = "send test";
 
+    let generation_hash = request.body.hash;
+    let epoch_adjustment = request.body.epochAdjustment;
+    let private_key = request.body.privateKey;
+    let mosaic_id = request.body.mosaic;
+    let node = request.body.node;
+    let transaction_status = node + "/transactionStatus/";
+    let network_type = symbol.NetworkType.TEST_NET;
+    if(request.body.node === 'prod'){
+        network_type = symbol.NetworkType.MAIN_NET;
+    }
+    let sendAddress = request.body.sendAddress;
+    let price = request.body.price;
+    let message = request.body.message;
+
     try {
-        let alice = symbol.Account.createFromPrivateKey(PRIVATE_KEY, NETWORK_TYPE);
+        let alice = symbol.Account.createFromPrivateKey(private_key, network_type);
         let tx = symbol.TransferTransaction.create(
-            symbol.Deadline.create(EPOCH_ADJUSTMENT),
+            symbol.Deadline.create(epoch_adjustment),
             symbol.Address.createFromRawAddress(sendAddress),
             [
                 new symbol.Mosaic(
-                    new symbol.MosaicId(MOSAIC_ID),
+                    new symbol.MosaicId(mosaic_id),
                     symbol.UInt64.fromUint(price)
                 )
             ],
             symbol.PlainMessage.create(message),
-            NETWORK_TYPE,
+            network_type,
             symbol.UInt64.fromUint(100000)
         );
-        let signedTx = alice.sign(tx, GENERATION_HASH);
-        new symbol.TransactionHttp(NODE)
+        let signedTx = alice.sign(tx, generation_hash);
+        new symbol.TransactionHttp(node)
             .announce(signedTx)
             .subscribe(
                 (x) => {
@@ -71,10 +81,10 @@ app.post('/send', async (request, response) => {
                         address: sendAddress,
                         price : price,
                         transaction: transaction.hash,
-                        url: TRANSACTION_STATUS + transaction.hash,
+                        url: transaction_status + transaction.hash,
                     };
 
-                    console.log(TRANSACTION_STATUS + transaction.hash);
+                    console.log(transaction_status + transaction.hash);
 
                     axios
                         .post('http://localhost:8080/api/queue/add', data)

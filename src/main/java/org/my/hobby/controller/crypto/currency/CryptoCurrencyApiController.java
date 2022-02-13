@@ -12,8 +12,10 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.my.hobby.core.Queue;
+import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
 import org.my.hobby.service.CryptoService;
+import org.my.hobby.service.RuleService;
 
 record SendRequest(
         @NotBlank(message = "sendAddress not found") String sendAddress,
@@ -36,6 +38,9 @@ public class CryptoCurrencyApiController {
     @Inject
     CryptoService cryptoService;
 
+    @Inject
+    RuleService ruleService;
+
     /**
      * 送金
      *
@@ -49,7 +54,9 @@ public class CryptoCurrencyApiController {
                 sendRequest.price(),
                 sendRequest.message()
         );
-        cryptoService.send(symbol);
+
+        Rule rule = ruleService.rule();
+        cryptoService.send(rule, symbol);
         return "OK";
     }
 

@@ -1,9 +1,8 @@
 package org.my.hobby.repository;
 
-import java.util.List;
-
+import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
 
 public interface CryptoRepository {
-    void send(Symbol symbol);
+    void send(Rule rule, Symbol symbol);
 }
