@@ -22,7 +22,9 @@ import org.jboss.resteasy.spi.HttpRequest;
 import org.my.hobby.core.CryptoType;
 import org.my.hobby.core.NetworkType;
 import org.my.hobby.core.Rule;
+import org.my.hobby.core.User;
 import org.my.hobby.service.RuleService;
+import org.my.hobby.service.UserService;
 
 @Path("/")
 public class CryptoCurrencyController {
@@ -33,12 +35,15 @@ public class CryptoCurrencyController {
     @Inject
     RuleService ruleService;
 
+    @Inject
+    UserService userService;
+
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance setting(List<CryptoType> cryptoTypes, List<NetworkType> networkTypeList, ViewSetting setting,
                                                       Long ruleId);
 
-        public static native TemplateInstance list(Item item);
+        public static native TemplateInstance list(List<User> userList);
     }
 
     /**
@@ -109,7 +114,8 @@ public class CryptoCurrencyController {
     @Path("")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance list() {
-        return Templates.list(new Item("test", new BigDecimal("1.234")));
+        List<User> users = userService.userSendList();
+        return Templates.list(users);
     }
 
     /**

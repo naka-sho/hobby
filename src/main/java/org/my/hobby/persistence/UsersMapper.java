@@ -29,11 +29,14 @@ public interface UsersMapper {
 
     @Select("""
             select
-                users.*
+                users.address,
+                send_log.send_log_id
             from
                 users
+                left join send_log on
+                    users.address = send_log.address
             """)
-    List<UserListRecord> all();
+    List<UserSendListRecord> userSendList();
 
     @Insert("""
             INSERT INTO users

@@ -107,42 +107,26 @@
                     <div class="card">
                         <h5 class="card-header">アドレス一覧</h5>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">アドレス</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {#for user in userList}
                                     <tr>
-                                        <th scope="col">アドレス</th>
-                                        <th scope="col"></th>
+                                        <th scope="row">{user.address}</th>
+                                        {#if user.send }
+                                        <td><p class="btn btn-sm btn-primary">Done</p></td>
+                                        {#else }
+                                        <td><p class="btn btn-sm btn-danger">Wait</p></td>
+                                        {/if}
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY</th>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Done</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY</th>
-                                        <td><a href="#" class="btn btn-sm btn-danger">Error</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY</th>
-                                        <td><a href="#" class="btn btn-sm btn-primary">有効</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY</th>
-                                        <td><a href="#" class="btn btn-sm btn-primary">有効</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY</th>
-                                        <td><a href="#" class="btn btn-sm btn-primary">有効</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">TDMYLKCTEVPSRPTG4UXW47IQPCYNLW2OVWZMLGY</th>
-                                        <td><a href="#" class="btn btn-sm btn-primary">有効</a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                {/for}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

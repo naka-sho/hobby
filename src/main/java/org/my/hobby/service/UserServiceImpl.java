@@ -3,6 +3,9 @@ package org.my.hobby.service;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import java.util.List;
+
+import org.my.hobby.core.User;
 import org.my.hobby.repository.UserRepository;
 
 @Singleton
@@ -24,5 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(String address) {
         userRepository.deleteByAddress(address);
+    }
+
+    @Override
+    public List<User> userSendList() {
+        return userRepository.userSendList();
     }
 }
