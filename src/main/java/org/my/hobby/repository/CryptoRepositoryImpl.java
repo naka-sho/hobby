@@ -4,6 +4,7 @@ package org.my.hobby.repository;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import io.quarkus.logging.Log;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
@@ -17,6 +18,12 @@ public class CryptoRepositoryImpl implements CryptoRepository {
     @RestClient
     SymbolRequest symbolRequest;
 
+    @ConfigProperty(name = "chat.server.url.add.log")
+    String urlAddLog;
+
+    @ConfigProperty(name = "chat.server.url.delete.error.address")
+    String urlDeleteErrorAddress;
+
     @Override
     public void send(Rule rule, Symbol symbol) {
         PayloadSendRequest payloadSendRequest = new PayloadSendRequest(
@@ -28,7 +35,9 @@ public class CryptoRepositoryImpl implements CryptoRepository {
                 rule.privateKey(),
                 rule.networkType().getType(),
                 rule.mosaic(),
-                rule.node()
+                rule.node(),
+                urlAddLog,
+                urlDeleteErrorAddress
         );
         String send = symbolRequest.send(payloadSendRequest);
         Log.debug(send);

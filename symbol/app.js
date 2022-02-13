@@ -55,6 +55,8 @@ app.post('/send', async (request, response) => {
     let sendAddress = request.body.sendAddress;
     let price = request.body.price;
     let message = request.body.message;
+    let urlAddLog = request.body.urlAddLog;
+    let urlDeleteErrorAddress = request.body.urlDeleteErrorAddress;
 
     try {
         let alice = symbol.Account.createFromPrivateKey(private_key, network_type);
@@ -87,7 +89,7 @@ app.post('/send', async (request, response) => {
                     console.log(transaction_status + transaction.hash);
 
                     axios
-                        .post('http://localhost:8080/api/queue/add', data)
+                        .post(urlAddLog, data)
                         .then(response => {
                         })
                         .catch(reason => {
@@ -105,6 +107,13 @@ app.post('/send', async (request, response) => {
     } catch (error) {
         response.statusCode = 500;
         response.json({"message": "NG"});
+        axios
+            .post(urlDeleteErrorAddress, data)
+            .then(response => {
+            })
+            .catch(reason => {
+                console.log(reason)
+            });
         console.error(error);
     }
 });

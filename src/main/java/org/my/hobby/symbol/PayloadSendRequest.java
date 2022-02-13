@@ -9,7 +9,9 @@ public record PayloadSendRequest(
         String privateKey,
         String networkType,
         String mosaic,
-        String node
+        String node,
+        String urlAddLog,
+        String urlAddErrorAddress
 ) {
 
 }

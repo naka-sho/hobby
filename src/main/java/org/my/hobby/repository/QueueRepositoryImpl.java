@@ -46,7 +46,6 @@ public class QueueRepositoryImpl implements QueueRepository
 
     @Override
     public void delete(Long queueId) {
-        Log.debug("削除開始");
         queueMapper.delete(queueId);
     }
 
