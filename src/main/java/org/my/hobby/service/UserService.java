@@ -5,8 +5,8 @@ import java.util.List;
 import org.my.hobby.core.User;
 
 public interface UserService {
-    void addList();
-    void deleteList();
+    void addList(List<String> userList);
+    void deleteList(List<String> userList);
     void delete(String address);
     public List<User> userSendList();
 }

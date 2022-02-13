@@ -6,6 +6,8 @@ import org.my.hobby.core.User;
 
 public interface UserRepository {
     String address();
+    void addList(List<String> userList);
+    void deleteList(List<String> userList);
     void deleteByAddress(String address);
     List<User> userSendList();
 }

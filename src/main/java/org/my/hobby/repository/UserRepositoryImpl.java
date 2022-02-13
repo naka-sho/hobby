@@ -12,6 +12,7 @@ import org.my.hobby.core.User;
 import org.my.hobby.persistence.UserListRecord;
 import org.my.hobby.persistence.UserSendListRecord;
 import org.my.hobby.persistence.UsersMapper;
+import org.my.hobby.persistence.UsersRecord;
 
 @Singleton
 public class UserRepositoryImpl implements UserRepository {
@@ -24,6 +25,20 @@ public class UserRepositoryImpl implements UserRepository {
         return user.map(
                 e -> e.getAddress()
         ).orElse("");
+    }
+
+    @Override
+    public void addList(List<String> userList) {
+        List<UsersRecord> collect = userList.stream().map(e ->
+                new UsersRecord().setAddress(e)
+        ).collect(Collectors.toList());
+
+        usersMapper.insert(collect);
+    }
+
+    @Override
+    public void deleteList(List<String> userList) {
+
     }
 
     @Override

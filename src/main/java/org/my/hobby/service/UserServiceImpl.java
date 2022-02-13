@@ -15,12 +15,12 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public void addList() {
-
+    public void addList(List<String> userList) {
+        userRepository.addList(userList);
     }
 
     @Override
-    public void deleteList() {
+    public void deleteList(List<String> userList) {
 
     }
 

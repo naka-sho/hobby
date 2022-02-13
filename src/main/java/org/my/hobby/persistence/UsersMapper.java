@@ -39,15 +39,17 @@ public interface UsersMapper {
     List<UserSendListRecord> userSendList();
 
     @Insert("""
-            INSERT INTO users
-                (address)
-            VALUES
-                <foreach item = 'item' index = 'index' collection='usersList' open='(' separator=',' close=')'>
-                    #{usersList.address}
-                </foreach>
+            <script>
+                INSERT INTO users
+                    (address)
+                VALUES
+                    <foreach item = 'item' index = 'index' collection='usersList' open='' separator=',' close=''>
+                        (#{item.address})
+                    </foreach>
+            </script>
             """
     )
-    void insert(@Param("users") UsersRecord usersRecord);
+    void insert(@Param("usersList") List<UsersRecord> usersRecord);
 
     @Delete("""
             <script>
@@ -56,12 +58,12 @@ public interface UsersMapper {
                     users
                 WHERE
                     address in
-                    <foreach item = 'item' index = 'index' collection='usersList' open='(' separator=',' close=')'>
-                        #{usersList.address}
+                    <foreach item = 'item' index = 'index' collection='usersList' open='' separator=',' close=''>
+                        (#{item.address})
                     </foreach>
             </script>
             """)
-    void delete(@Param("usersList") List<UsersRecord> usersRecordList);
+    void delete(@Param("usersList") List<UsersRecord> usersRecord);
 
     @Delete("""
                 DELETE
