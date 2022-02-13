@@ -11,7 +11,7 @@ public record PayloadSendRequest(
         String mosaic,
         String node,
         String urlAddLog,
-        String urlAddErrorAddress
+        String urlDeleteErrorAddress
 ) {
 
 }

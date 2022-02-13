@@ -20,4 +20,9 @@ public class UserRepositoryImpl implements UserRepository {
                 e -> e.getAddress()
         ).orElse("");
     }
+
+    @Override
+    public void deleteByAddress(String address) {
+        usersMapper.deleteByAddress(address);
+    }
 }

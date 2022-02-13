@@ -108,13 +108,13 @@ app.post('/send', async (request, response) => {
         response.statusCode = 500;
         response.json({"message": "NG"});
         axios
-            .post(urlDeleteErrorAddress, data)
+            .post(urlDeleteErrorAddress, {"address": sendAddress})
             .then(response => {
+                console.log("error address" +  sendAddress)
             })
             .catch(reason => {
                 console.log(reason)
             });
-        console.error(error);
     }
 });
 

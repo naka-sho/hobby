@@ -13,6 +13,7 @@ import org.my.hobby.core.Rule;
 import org.my.hobby.core.Symbol;
 import org.my.hobby.service.CryptoService;
 import org.my.hobby.service.RuleService;
+import org.my.hobby.service.UserService;
 
 record SendRequest(
         @Min(0L) Long price,
@@ -28,6 +29,11 @@ record AddQueueRequest(
 ) {
 }
 
+record ErrorAddressDeleteRequest(
+        @NotBlank(message = "address not found") String address
+) {
+}
+
 @Path("api")
 public class CryptoCurrencyApiController {
 
@@ -36,6 +42,9 @@ public class CryptoCurrencyApiController {
 
     @Inject
     RuleService ruleService;
+
+    @Inject
+    UserService userService;
 
     /**
      * 送金
@@ -47,8 +56,12 @@ public class CryptoCurrencyApiController {
     @Produces(MediaType.APPLICATION_JSON)
     public String send(SendRequest sendRequest) {
 
+        String address = cryptoService.address();
+        if("".equals(address)){
+            return "all transaction complete";
+        }
 
-        Symbol symbol = new Symbol(cryptoService.address(),
+        Symbol symbol = new Symbol(address,
                 sendRequest.price(),
                 sendRequest.message()
         );
@@ -74,6 +87,19 @@ public class CryptoCurrencyApiController {
         );
         cryptoService.add(queue);
         cryptoService.createLog(queue);
+        return "OK";
+    }
+
+    /**
+     * 送金ログ登録
+     *
+     * @return
+     */
+    @POST
+    @Path("error/address/delete")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String errorAddressDelete(ErrorAddressDeleteRequest errorAddressDeleteRequest) {
+        userService.delete(errorAddressDeleteRequest.address());
         return "OK";
     }
 }

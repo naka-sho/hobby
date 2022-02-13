@@ -17,6 +17,10 @@ public interface UsersMapper {
                 users.*
             from
                 users
+                left join send_log on
+                    users.address = send_log.address
+            where
+                send_log.send_log_id is null
             order by
                 user_id
             limit 1 
@@ -55,4 +59,13 @@ public interface UsersMapper {
             </script>
             """)
     void delete(@Param("usersList") List<UsersRecord> usersRecordList);
+
+    @Delete("""
+                DELETE
+                FROM
+                    users
+                WHERE
+                    address = #{address}
+            """)
+    void deleteByAddress(@Param("address") String address);
 }

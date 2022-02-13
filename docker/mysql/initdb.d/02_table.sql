@@ -23,28 +23,8 @@ CREATE TABLE users
     user_id bigint unsigned NOT NULL AUTO_INCREMENT,
     address VARCHAR(1024) not null ,
     created_at datetime not null default current_timestamp,
-    PRIMARY KEY (`user_id`)
-);
-
-DROP TABLE IF EXISTS error_address;
-
-CREATE TABLE error_address
-(
-    error_address_id bigint unsigned NOT NULL AUTO_INCREMENT,
-    address VARCHAR(1024) not null ,
-    created_at datetime not null default current_timestamp,
-    PRIMARY KEY (`error_address_id`)
-);
-
-DROP TABLE IF EXISTS user_twitter;
-
-CREATE TABLE user_twitter
-(
-    user_twitter_id bigint unsigned NOT NULL AUTO_INCREMENT,
-    user_id INT(10) unsigned NOT NULL,
-    account VARCHAR(1024) not null ,
-    created_at datetime not null default current_timestamp,
-    PRIMARY KEY (`user_twitter_id`)
+    PRIMARY KEY (`user_id`),
+    INDEX idx_address(address)
 );
 
 DROP TABLE IF EXISTS queue;
