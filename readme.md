@@ -22,7 +22,7 @@ make prod
 2. 
 
 - 管理画面 https://crypto.currency.com.127.0.0.1.nip.io
-- チャット画面 https://crypto.currency.com.127.0.0.1.nip.io
+- チャット画面 https://user.chat.com.127.0.0.1.nip.io
 - 送金API
     - http://localhost:8080/api/send
     - POST

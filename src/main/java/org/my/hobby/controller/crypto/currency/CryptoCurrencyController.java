@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.quarkus.logging.Log;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.smallrye.common.constraint.NotNull;
@@ -208,7 +210,11 @@ public class CryptoCurrencyController {
                             price,
                             "一括送金"
                     );
-                    cryptoService.send(rule, symbol);
+                    try {
+                        cryptoService.send(rule, symbol);
+                    }catch (WebApplicationException webApplicationException){
+                        Log.debug(webApplicationException.getMessage());
+                    }
                 });
 
         URI requestUrI = request.getUri().getRequestUri();
