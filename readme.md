@@ -1,4 +1,4 @@
-# 仮想通貨送信アプリ
+# 簡易仮想通貨送信システム
 
 ## 概要
 
@@ -27,18 +27,19 @@ sdk default java 17.0.1-open
  
  https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/install/
 
+# 起動手順
+
 ```shell
 make prod
 ```
 
 ## 使用方法
 
-1. 管理画面より、アドレスを登録
-   1. 改行区切りで登録できます。google アンケートなので集計して貼り付けて登録してください
-2. 
-
-- 管理画面 https://crypto.currency.com.127.0.0.1.nip.io
-- チャット画面 https://user.chat.com.127.0.0.1.nip.io
+1. 管理画面より、アドレスを登録 https://crypto.currency.com.127.0.0.1.nip.io
+   1. 改行区切りで登録できます。google アンケートなどで集計して貼り付けて登録してください
+2. 管理画面より、送金を押すことで登録しているアドレス全てに一括で送金されます。
+3. 送金状況はチャット画面で確認できます https://user.chat.com.127.0.0.1.nip.io
+4. 以下のAPIをそのほかのゲームからリクエストすることで、簡単に送金ができるようになります。
 - 送金API
     - http://localhost:8080/api/send
     - POST
@@ -47,9 +48,8 @@ make prod
         - price: 送金したい金額(symbolの場合、5000000 → 5XYMで計算されます)
         - message: トランザクションメッセージ
             - 例：{"price":5000000,"message":"test"}
-            - 本番環境を作る場合は以下を実行してください。
 
-ここからは開発者用です。
+### ここからは開発者用です。
 
 開発環境起動
 
@@ -60,11 +60,3 @@ make symbol-server
 make user-client
 make socket
 ```
-
-
-
-### TODO
- - 現在、symbolしか対応していません。
- - アグリゲートには対応していません
- - エラー処理は省略しています
- - 過去のチャットが出てこない
