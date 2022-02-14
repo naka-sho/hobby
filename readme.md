@@ -5,11 +5,27 @@
 ユーザのアプリにAPIをリクエストする実装を作るだけで、簡単にsymbolを送金できます。
 主にツイッターなどでよくあるsymbolのばらまき企画の際に、ゲーム感覚で使用できます。
 
-現在macにしか対応しておりません。
-docker for macをインストールして、該当のプロジェクトをcloneして以下のコマンドを実行してください。
-
 システムがわかる人は、conohaなどレンタルサーバーを借りればチャット画面を公開することもできます。
 その際は、プライベートキーの流出に気をつけてください。
+
+## 事前準備
+
+javaとdockerをインストールしてください。
+
+※現在macにしか対応しておりません。
+
+ - javaのインストール
+
+```
+curl -s "https://get.sdkman.io" | bash
+sdk list java 
+sdk install java 17.0.1-open 
+sdk default java 17.0.1-open
+```
+
+ - docker のインストール
+ 
+ https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/install/
 
 ```shell
 make prod

@@ -25,10 +25,7 @@ build:
 	./gradlew build && docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache
 
 prod:
-	cd symbol && npm install && cd ../ && \
-	cd user/chat-client && yarn install && cd ../../ && \
-	cd user/chat-server && npm install && cd ../../ && \
-	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache && \
+	./gradlew build && docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache && \
 	docker-compose \
 		-f docker-compose-adminer.yml \
 		-f docker-compose-mysql.yml \
