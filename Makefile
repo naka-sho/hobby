@@ -25,6 +25,9 @@ build:
 	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache
 
 prod:
+	cd symbol && npm install && cd ../ && \
+	cd user/chat-client && yarn install && cd ../../ && \
+	cd user/chat-server && npm install && cd ../../ && \
 	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache && \
 	docker-compose \
 		-f docker-compose-adminer.yml \
@@ -33,4 +36,5 @@ prod:
 		-f docker-compose-symbol.yml \
 		-f docker-compose-user.yml \
 		-f docker-compose-socket.yml \
+		-f docker-compose-router-prod.yml \
 		up

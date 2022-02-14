@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  user-client:
+    build:
+      context: user/chat-client
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"

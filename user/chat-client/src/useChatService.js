@@ -8,7 +8,7 @@ const useChatService = (initialMessage) => {
 
     useEffect(() => {
         console.log('Connectinng..');
-        socketRef.current = io();
+        socketRef.current = io("http://localhost:3001");
         socketRef.current.on('sendMessage', payload => {
             // console.log(payload);
             setMessages(prevMessages => [...prevMessages, payload]);
