@@ -18,6 +18,7 @@ import org.my.hobby.core.Queue;
 import org.my.hobby.core.TransactionStatus;
 import org.my.hobby.core.TransactionStatusGroupType;
 import org.my.hobby.service.CryptoService;
+import org.my.hobby.service.UserService;
 
 @ApplicationScoped
 public class ChatBotNotice {
@@ -26,6 +27,9 @@ public class ChatBotNotice {
 
     @Inject
     CryptoService cryptoService;
+
+    @Inject
+    UserService userService;
 
     @Inject
     ObjectMapper objectMapper;
@@ -43,13 +47,21 @@ public class ChatBotNotice {
         queues.stream().parallel().forEach(e -> {
             HttpResponse response = this.requestUrl(e.url());
             TransactionStatus transactionStatus = this.modelMap((String) response.body());
-            if (!TransactionStatusGroupType.confirmed(transactionStatus.getGroup())) {
+            Log.debug(transactionStatus);
+
+            if (TransactionStatusGroupType.failed(transactionStatus.getGroup())) {
+                cryptoService.deleteQueue(e.queueId());
+                userService.delete(e.address());
+                return;
+            }
+
+            if (TransactionStatusGroupType.unconfirmed(transactionStatus.getGroup())) {
                 return;
             }
 
             ReqChatComplete reqChatCompleteParameters = new ReqChatComplete(
                     "管理人",
-                    transactionStatus.getHash() + " に " + e.price() + " 送金完了"
+                    e.address() + " に " + e.price() + " 送金完了"
             );
 
             this.requestChatComplete(reqChatCompleteUrl, reqChatCompleteParameters);

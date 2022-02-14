@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public enum TransactionStatusGroupType {
     UNCONFIRMED("unconfirmed"),
+    FAILED("failed"),
     CONFIRMED("confirmed");
 
     @Getter
@@ -13,7 +14,11 @@ public enum TransactionStatusGroupType {
         this.name = name;
     }
 
-    static public boolean confirmed(String name){
-        return TransactionStatusGroupType.CONFIRMED.getName().equals(name);
+    static public boolean unconfirmed(String name){
+        return TransactionStatusGroupType.UNCONFIRMED.getName().equals(name);
+    }
+
+    static public boolean failed(String name){
+        return TransactionStatusGroupType.FAILED.getName().equals(name);
     }
 }

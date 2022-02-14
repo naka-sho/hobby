@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService {
     public List<User> userSendList() {
         return userRepository.userSendList();
     }
+
+    @Override
+    public List<User> addressList() {
+        return userRepository.addressList();
+    }
 }

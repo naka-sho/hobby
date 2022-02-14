@@ -10,4 +10,5 @@ public interface UserRepository {
     void deleteList(List<String> userList);
     void deleteByAddress(String address);
     List<User> userSendList();
+    List<User> addressList();
 }

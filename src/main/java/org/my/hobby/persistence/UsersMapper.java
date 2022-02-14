@@ -38,6 +38,19 @@ public interface UsersMapper {
             """)
     List<UserSendListRecord> userSendList();
 
+    @Select("""
+            select
+                users.address,
+                count(send_log.send_log_id) as cnt
+            from
+                users
+                left join send_log on
+                    users.address = send_log.address
+            group by
+                users.address
+            """)
+    List<AddressListRecord> addressList();
+
     @Insert("""
             <script>
                 INSERT INTO users

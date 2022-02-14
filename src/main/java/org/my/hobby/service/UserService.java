@@ -9,4 +9,5 @@ public interface UserService {
     void deleteList(List<String> userList);
     void delete(String address);
     List<User> userSendList();
+    List<User> addressList();
 }

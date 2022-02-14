@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.my.hobby.core.User;
+import org.my.hobby.persistence.AddressListRecord;
 import org.my.hobby.persistence.UserListRecord;
 import org.my.hobby.persistence.UserSendListRecord;
 import org.my.hobby.persistence.UsersMapper;
@@ -50,6 +51,14 @@ public class UserRepositoryImpl implements UserRepository {
         List<UserSendListRecord> userSendList = usersMapper.userSendList();
         return userSendList.stream().map(e ->
                 new User(e.getAddress(), !Objects.isNull(e.getSendLogId()))
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> addressList() {
+        List<AddressListRecord> userSendList = usersMapper.addressList();
+        return userSendList.stream().map(e ->
+                new User(e.getAddress(), e.getCnt() > 0)
         ).collect(Collectors.toList());
     }
 

@@ -196,12 +196,13 @@ public class CryptoCurrencyController {
     public Response sendUser(@FormParam("price") @Min(0L) @NotNull Long price,
                              @Context HttpRequest request) throws URISyntaxException {
 
-        List<User> users = userService.userSendList();
+        List<User> users = userService.addressList();
 
         Rule rule = ruleService.rule();
 
-        users.stream().parallel()
+        users.stream()
                 .filter(e -> !e.send())
+                .parallel()
                 .forEach(e -> {
                     Symbol symbol = new Symbol(e.address(),
                             price,

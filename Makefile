@@ -22,7 +22,7 @@ socket:
 	cd user/chat-server && npm install && node app.js
 
 build:
-	docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache
+	./gradlew build && docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hobby-jvm . --no-cache
 
 prod:
 	cd symbol && npm install && cd ../ && \

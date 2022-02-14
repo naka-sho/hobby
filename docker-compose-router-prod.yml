@@ -11,8 +11,8 @@ services:
       HSTS_MAX_AGE: 60
       STAGE: local
       # FORCE_RENEW: 'true'
-      DOMAINS: 'crypto.currency.com.127.0.0.1.nip.io -> http://host.docker.internal:8080,
-                user.chat.com.127.0.0.1.nip.io -> http://host.docker.internal:3002,
+      DOMAINS: 'crypto.currency.com.127.0.0.1.nip.io -> http://cryptocurrency:8080,
+                user.chat.com.127.0.0.1.nip.io -> http://user-client:3002,
                 '
     volumes:
       - https-portal-data:/var/lib/https-portal
