@@ -5,7 +5,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server,  {
+    cors: {
+        origin: '*'
+    }
+});
 
 app.post('/chat/notice', async (request, response) => {
     console.log(request.body)
