@@ -64,4 +64,5 @@ make dev
 make symbol-server
 make user-client
 make socket
+make router
 ```
