@@ -10,7 +10,7 @@
 
 ## 事前準備
 
-javaとdockerをインストールしてください。
+nodeとjavaとdockerをインストールしてください。
 
 ※現在macにしか対応しておりません。
 
@@ -21,6 +21,14 @@ curl -s "https://get.sdkman.io" | bash
 sdk list java 
 sdk install java 17.0.1-open 
 sdk default java 17.0.1-open
+```
+
+ - javaのインストール
+
+```
+brew install nodenv
+nodenv install -l
+nodenv install 14.13.0
 ```
 
  - docker のインストール
