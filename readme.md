@@ -30,7 +30,12 @@ sdk default java 17.0.1-open
 # 起動手順
 
 ```shell
-make prod
+make tool
+make dev
+make symbol-server
+make user-client
+make socket
+make router
 ```
 
 ## 使用方法
@@ -74,16 +79,3 @@ javaによるrobocodeのダメージ受けたときのイベントに追加し�
 ![image](https://user-images.githubusercontent.com/43595281/154279449-f5e7b90e-6a49-4d5a-87b0-6dafa5b56494.png)
 
 ## 不具合はissueに
-
-### ここからは開発者用です。
-
-開発環境起動
-
-```shell
-make tool
-make dev
-make symbol-server
-make user-client
-make socket
-make router
-```
