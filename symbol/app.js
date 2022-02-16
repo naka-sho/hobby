@@ -49,7 +49,7 @@ app.post('/send', async (request, response) => {
     let node = request.body.node;
     let transaction_status = node + "/transactionStatus/";
     let network_type = symbol.NetworkType.TEST_NET;
-    if(request.body.node === 'prod'){
+    if(request.body.networkType === 'prod'){
         network_type = symbol.NetworkType.MAIN_NET;
     }
     let sendAddress = request.body.sendAddress;
@@ -57,6 +57,8 @@ app.post('/send', async (request, response) => {
     let message = request.body.message;
     let urlAddLog = request.body.urlAddLog;
     let urlDeleteErrorAddress = request.body.urlDeleteErrorAddress;
+
+    // 相手のアドレスの存在チェックが必要
 
     try {
         let alice = symbol.Account.createFromPrivateKey(private_key, network_type);
@@ -98,6 +100,7 @@ app.post('/send', async (request, response) => {
                         });
                 },
                 (err) => {
+                    // exception
                     console.log(err)
                 }
             );
