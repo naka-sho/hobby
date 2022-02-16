@@ -49,6 +49,11 @@ make prod
         - message: トランザクションメッセージ
             - 例：{"price":5000000,"message":"test"}
 
+![image](https://user-images.githubusercontent.com/43595281/154271249-d3c6f6bf-4c43-412d-974f-3a691161c6c6.png)
+![image](https://user-images.githubusercontent.com/43595281/154271439-15c0bd8d-c4a9-4667-9bfa-5ab59007e97e.png)
+![image](https://user-images.githubusercontent.com/43595281/154272233-7ea43499-5cd5-4233-b817-499d3ceadd72.png)
+![image](https://user-images.githubusercontent.com/43595281/154272333-803fcb1d-9aa9-4341-aada-50fa9cb65ae9.png)
+
 ### ここからは開発者用です。
 
 開発環境起動
