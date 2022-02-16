@@ -23,7 +23,7 @@ sdk install java 17.0.1-open
 sdk default java 17.0.1-open
 ```
 
- - javaのインストール
+ - nodeのインストール
 
 ```
 brew install nodenv
