@@ -84,8 +84,6 @@ TAWQ2IYAHEXLA5FNUOBVVEK4W2O42XKFAGUS7Ra
         - message: トランザクションメッセージ
             - 例：{"price":10000000,"message":"ダメージ受けた"}
 
-javaによるrobocodeのダメージ受けたときのイベントに追加しました。
+例：javaによるrobocodeのダメージ受けたときのイベントに追加しました。
 
 ![image](https://user-images.githubusercontent.com/43595281/154279449-f5e7b90e-6a49-4d5a-87b0-6dafa5b56494.png)
-
-## 不具合はissueに
