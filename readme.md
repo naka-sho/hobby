@@ -57,6 +57,17 @@ make router
 
 ![image](https://user-images.githubusercontent.com/43595281/154271249-d3c6f6bf-4c43-412d-974f-3a691161c6c6.png)
 
+本番ネットの場合の例：
+```json
+{
+	"hash": "57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6",
+	"epochAdjustment": "1615853185",
+	"networkType": "prod",
+	"mosaic": "6BED913FA20223F8",
+	"node": "https://wolf.importance.jp:3001",
+}
+```
+
 test用アドレス
 ```
 TBXXCH3J6MXYW2AMYZDAB2IXFWEMHEOU67ZTG7Y
