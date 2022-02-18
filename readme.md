@@ -8,9 +8,12 @@
 システムがわかる人は、conohaなどレンタルサーバーを借りればチャット画面を公開することもできます。
 その際は、プライベートキーの流出に気をつけてください。
 
+ - `プライベートキーの流出には責任持ちません`
+ - `追加機能のリクエストはissuesに登録してください`
+
 ## 事前準備
 
-javaとdockerをインストールしてください。
+nodeとjavaとdockerをインストールしてください。
 
 ※現在macにしか対応しておりません。
 
@@ -23,6 +26,14 @@ sdk install java 17.0.1-open
 sdk default java 17.0.1-open
 ```
 
+ - nodeのインストール
+
+```
+brew install nodenv
+nodenv install -l
+nodenv install 14.13.0
+```
+
  - docker のインストール
  
  https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/install/
@@ -30,7 +41,12 @@ sdk default java 17.0.1-open
 # 起動手順
 
 ```shell
-make prod
+make tool
+make dev
+make symbol-server
+make user-client
+make socket
+make router
 ```
 
 ## 使用方法
@@ -41,6 +57,17 @@ make prod
 3. 送金状況はチャット画面で確認できます https://user.chat.com.127.0.0.1.nip.io
 
 ![image](https://user-images.githubusercontent.com/43595281/154271249-d3c6f6bf-4c43-412d-974f-3a691161c6c6.png)
+
+本番ネットの場合の例：
+```json
+{
+	"hash": "57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6",
+	"epochAdjustment": "1615853185",
+	"networkType": "prod",
+	"mosaic": "6BED913FA20223F8",
+	"node": "https://wolf.importance.jp:3001",
+}
+```
 
 test用アドレス
 ```
@@ -69,19 +96,6 @@ TAWQ2IYAHEXLA5FNUOBVVEK4W2O42XKFAGUS7Ra
         - message: トランザクションメッセージ
             - 例：{"price":10000000,"message":"ダメージ受けた"}
 
-javaによるrobocodeのダメージ受けたときのイベントに追加しました。
+例：javaによるrobocodeのダメージ受けたときのイベントに追加しました。
 
 ![image](https://user-images.githubusercontent.com/43595281/154279449-f5e7b90e-6a49-4d5a-87b0-6dafa5b56494.png)
-
-### ここからは開発者用です。
-
-開発環境起動
-
-```shell
-make tool
-make dev
-make symbol-server
-make user-client
-make socket
-make router
-```

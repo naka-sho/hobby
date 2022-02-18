@@ -29,7 +29,7 @@ app.get('/net/type', async (request, response) => {
  * エラーの場合はconsoleログに出力するだけで、OKを返す
  */
 app.post('/send', async (request, response) => {
-    console.log(request.body)
+    // console.log(request.body)
     // https://testnet.symbol.tools/?recipient=TARK3GGU52N6FMAHAAGOWGOCDZ7WEKFKYVTNWPA&amount=10000
     // const generation_hash = '7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836';
     // const epoch_adjustment = 1637848847;
@@ -95,13 +95,12 @@ app.post('/send', async (request, response) => {
                         .then(response => {
                         })
                         .catch(reason => {
-                            console.log(transaction)
-                            console.log(reason)
+                            console.log("error")
                         });
                 },
                 (err) => {
                     // exception
-                    console.log(err)
+                    console.log("error")
                 }
             );
         response.statusCode = 200;
@@ -116,8 +115,8 @@ app.post('/send', async (request, response) => {
                 console.log("error address" +  sendAddress)
             })
             .catch(reason => {
-                console.log(reason)
-            });
+                console.log("error")
+        });
     }
 });
 
