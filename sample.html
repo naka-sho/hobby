@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>サンプル</title>
+</head>
+<body>
+
+<p>ボタンをクリックするとイベントが発生して、管理画面に登録している宛先に送信されます。</p>
+
+<input type="button" value="button" id="btn">
+
+<script>
+    function butotnClick(){
+        fetch('http://localhost:8080/api/send', {
+            method: 'POST',
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({"price":10000000,"message":"クリック"})
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            });
+    }
+
+    let button = document.getElementById('btn');
+    button.addEventListener('click', butotnClick);
+</script>
+
+</body>
+</html>

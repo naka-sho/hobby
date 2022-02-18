@@ -49,6 +49,11 @@ make socket
 make router
 ```
 
+## サンプルゲーム
+
+ - `sample.html`
+    - クリックすると仮想通貨が送信されます
+
 ## 使用方法
 
 1. 管理画面より、アドレスを登録 https://crypto.currency.com.127.0.0.1.nip.io
